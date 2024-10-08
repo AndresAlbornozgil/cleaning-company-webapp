@@ -1,5 +1,4 @@
 import React from 'react';
-import OurWorkCarousel from '../components/OurWorkCarousel';
 
 const HomePage = () => {
   return (
@@ -12,27 +11,27 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Our Work Section with Image Carousel */}
-      <section id="our-work" className="min-h-screen bg-white py-16">
-        <div className="container mx-auto text-center">
+      {/* Our Work Section - Centered content */}
+      <section id="our-work" className="min-h-screen bg-white py-16 flex items-center justify-center">
+        <div className="text-center">
           <h2 className="text-4xl font-bold mb-6">Our Work</h2>
-          <OurWorkCarousel />  {/* Image carousel component */}
+          <p>Information about our services and previous work.</p>
         </div>
       </section>
 
-      {/* Reviews Section */}
-      <section id="reviews" className="min-h-screen bg-gray-100 py-16">
-        <div className="container mx-auto text-center">
+      {/* Reviews Section - Centered content */}
+      <section id="reviews" className="min-h-screen bg-gray-100 py-16 flex items-center justify-center">
+        <div className="text-center">
           <h2 className="text-4xl font-bold mb-6">Reviews</h2>
-          <p className="text-lg">[Customer reviews will be displayed here]</p>
+          <p>Customer reviews and testimonials.</p>
         </div>
       </section>
 
-      {/* Contact Section with Centered Content */}
-      <section id="contact" className="min-h-[50vh] bg-white py-8 flex items-center justify-center">
+      {/* Contact Section - Half the height and centered content */}
+      <section id="contact" className="min-h-[50vh] bg-white flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-4xl font-bold mb-4">Contact Us</h2>
-          <p className="text-lg">Get in touch with us at info@cleaningco.com or call (555) 123-4567</p>
+          <p className="text-lg">Get in touch with us at info@cleaningco.com or call (555) 123-4567.</p>
         </div>
       </section>
     </div>

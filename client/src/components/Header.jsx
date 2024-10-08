@@ -1,14 +1,14 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-// Scrolls to the corresponding section on the page
-const scrollToSection = (id) => {
-  const element = document.getElementById(id);
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
-  }
+// Function to navigate and scroll to a section
+const handleNavClick = (navigate, section) => {
+  navigate(`/#${section}`);  // Navigate to homepage with hash
 };
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <header className="bg-blue-600 text-white p-4 fixed w-full top-0 z-50">
       <nav className="container mx-auto flex justify-between">
@@ -16,15 +16,15 @@ const Header = () => {
           CLEANING CO.
         </div>
         <ul className="flex space-x-6 uppercase">
-          <li className="cursor-pointer" onClick={() => scrollToSection('home')}>Home</li>
-          <li className="cursor-pointer" onClick={() => scrollToSection('book-cleaning')}>Book Cleaning</li>
-          <li className="cursor-pointer" onClick={() => scrollToSection('services')}>Services</li>
-          <li className="cursor-pointer" onClick={() => scrollToSection('our-work')}>Our Work</li>
-          <li className="cursor-pointer" onClick={() => scrollToSection('about')}>About</li>
-          <li className="cursor-pointer" onClick={() => scrollToSection('reviews')}>Reviews</li>
-          <li className="cursor-pointer" onClick={() => scrollToSection('contact')}>Contact</li>
-          <li className="cursor-pointer" onClick={() => scrollToSection('jobs')}>Jobs</li> {/* JOBS Link */}
-          <li className="cursor-pointer" onClick={() => scrollToSection('sign-in')}>Sign In</li>
+          <li><Link to="/">Home</Link></li>  {/* Home Link */}
+          <li><Link to="/book-cleaning">Book Cleaning</Link></li>  {/* Book Cleaning page */}
+          <li className="cursor-pointer" onClick={() => handleNavClick(navigate, 'our-work')}>Our Work</li>  {/* Navigate and scroll to Our Work */}
+          <li><Link to="/services">Services</Link></li>  {/* Services page */}
+          <li className="cursor-pointer" onClick={() => handleNavClick(navigate, 'reviews')}>Reviews</li>  {/* Navigate and scroll to Reviews */}
+          <li><Link to="/about">About</Link></li>  {/* About page */}
+          <li className="cursor-pointer" onClick={() => handleNavClick(navigate, 'contact')}>Contact</li>  {/* Navigate and scroll to Contact */}
+          <li><Link to="/jobs">Jobs</Link></li>  {/* Jobs page */}
+          <li><Link to="/sign-in">Sign In</Link></li>  {/* Sign In page */}
         </ul>
       </nav>
     </header>
