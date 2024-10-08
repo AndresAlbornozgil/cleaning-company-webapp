@@ -1,24 +1,22 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import Services from './pages/Services';
 import About from './pages/About';
 import Jobs from './pages/Jobs';
 import BookCleaning from './pages/BookCleaning';
 import SignInPage from './pages/SignInPage';
-import Footer from './components/Footer';
-import ScrollToSection from './components/ScrollToSection';  // Import ScrollToSection component
-import ScrollToTop from './components/ScrollToTop';  // Import ScrollToTop component
+import SignUp from './pages/SignUp';
 
 function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <ScrollToTop />  {/* Ensure scrolling to top on page change */}
-        <ScrollToSection />  {/* Ensure scrolling to sections based on hash */}
-        <main className="flex-grow mt-16">
+        {/* Add a top padding equal to the header's height */}
+        <main className="flex-grow pt-16"> {/* Adjust pt-16 based on header's height */}
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<Services />} />
@@ -26,6 +24,7 @@ function App() {
             <Route path="/jobs" element={<Jobs />} />
             <Route path="/book-cleaning" element={<BookCleaning />} />
             <Route path="/sign-in" element={<SignInPage />} />
+            <Route path="/signup" element={<SignUp />} />
           </Routes>
         </main>
         <Footer />
