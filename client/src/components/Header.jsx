@@ -1,36 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+// Scrolls to the corresponding section on the page
+const scrollToSection = (id) => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 
 const Header = () => {
   return (
-    <header className="bg-blue-600 text-white p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
+    <header className="bg-blue-600 text-white p-4 fixed w-full top-0 z-50">
+      <nav className="container mx-auto flex justify-between">
         <div className="text-2xl font-bold">
-          <Link to="/">Cleaning Co.</Link>
+          CLEANING CO.
         </div>
-
-        {/* Navigation Links */}
-        <nav>
-          <ul className="flex space-x-6">
-            <li>
-              <Link to="/" className="hover:text-gray-300">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link to="/login" className="hover:text-gray-300">
-                Login
-              </Link>
-            </li>
-            <li>
-              <Link to="/booking" className="hover:text-gray-300">
-                Book Now
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
+        <ul className="flex space-x-6 uppercase">
+          <li className="cursor-pointer" onClick={() => scrollToSection('home')}>Home</li>
+          <li className="cursor-pointer" onClick={() => scrollToSection('book-cleaning')}>Book Cleaning</li>
+          <li className="cursor-pointer" onClick={() => scrollToSection('services')}>Services</li>
+          <li className="cursor-pointer" onClick={() => scrollToSection('our-work')}>Our Work</li>
+          <li className="cursor-pointer" onClick={() => scrollToSection('about')}>About</li>
+          <li className="cursor-pointer" onClick={() => scrollToSection('reviews')}>Reviews</li>
+          <li className="cursor-pointer" onClick={() => scrollToSection('contact')}>Contact</li>
+          <li className="cursor-pointer" onClick={() => scrollToSection('jobs')}>Jobs</li> {/* JOBS Link */}
+          <li className="cursor-pointer" onClick={() => scrollToSection('sign-in')}>Sign In</li>
+        </ul>
+      </nav>
     </header>
   );
 };

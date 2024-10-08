@@ -1,21 +1,21 @@
-const express = require('express');
-const connectDB = require('./config/db'); // Import the MongoDB connection function
+const express = require('express'); // Correct import of express
+const connectDB = require('./config/db');
 const cors = require('cors');
-require('dotenv').config(); // Load environment variables
+require('dotenv').config();
 
-// Connect to the MongoDB database
+// Connect to MongoDB
 connectDB();
 
 const app = express();
 
 // Middleware
-app.use(cors()); // Enable CORS to allow requests from the frontend
-app.use(express.json()); // Enable parsing of JSON request bodies
+app.use(cors());
+app.use(express.json());
 
-// Define routes for user authentication and bookings
+// Routes
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/bookings', require('./routes/bookingRoutes'));
 
-// Start the server and listen on the specified port
+// Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
