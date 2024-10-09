@@ -31,6 +31,14 @@ const Header = () => {
     }
   };
 
+  // Function to handle scrolling to the top of the page for Services, About, and Jobs
+  const handlePageNavClick = (path) => {
+    navigate(path);
+    setTimeout(() => {
+      window.scrollTo(0, 0);  // Scroll to the top of the page
+    }, 100);  // Small delay to ensure smooth scrolling
+  };
+
   return (
     <header className="bg-blue-600 text-white p-4 fixed w-full top-0 z-50">
       <nav className="container mx-auto flex justify-between items-center">
@@ -52,12 +60,12 @@ const Header = () => {
         <ul className="hidden md:flex space-x-6 uppercase">
           <li className="cursor-pointer" onClick={handleHomeClick}>Home</li>  {/* HOME behavior handled here */}
           <li><Link to="/book-cleaning">Book Cleaning</Link></li>
-          <li><Link to="/services">Services</Link></li>  {/* Services moved before Our Work */}
-          <li className="cursor-pointer" onClick={() => handleNavClick(navigate, 'our-work')}>Our Work</li>  {/* Our Work moved after Services */}
+          <li className="cursor-pointer" onClick={() => handlePageNavClick('/services')}>Services</li>  {/* Navigates to the top of Services page */}
+          <li className="cursor-pointer" onClick={() => handleNavClick(navigate, 'our-work')}>Our Work</li>
           <li className="cursor-pointer" onClick={() => handleNavClick(navigate, 'reviews')}>Reviews</li>
-          <li><Link to="/about">About</Link></li>
+          <li className="cursor-pointer" onClick={() => handlePageNavClick('/about')}>About</li>  {/* Navigates to the top of About page */}
           <li className="cursor-pointer" onClick={() => handleNavClick(navigate, 'contact')}>Contact</li>
-          <li><Link to="/jobs">Jobs</Link></li>
+          <li className="cursor-pointer" onClick={() => handlePageNavClick('/jobs')}>Jobs</li>  {/* Navigates to the top of Jobs page */}
           <li><Link to="/sign-in">Sign In</Link></li>
         </ul>
 
@@ -66,12 +74,12 @@ const Header = () => {
           <ul className="md:hidden absolute top-16 left-0 w-full bg-blue-600 text-white p-4 flex flex-col space-y-4">
             <li className="cursor-pointer" onClick={() => { handleHomeClick(); toggleMenu(); }}>Home</li>  {/* Mobile HOME link */}
             <li><Link to="/book-cleaning" onClick={toggleMenu}>Book Cleaning</Link></li>
-            <li><Link to="/services" onClick={toggleMenu}>Services</Link></li>
+            <li className="cursor-pointer" onClick={() => { handlePageNavClick('/services'); toggleMenu(); }}>Services</li>
             <li className="cursor-pointer" onClick={() => { handleNavClick(navigate, 'our-work'); toggleMenu(); }}>Our Work</li>
             <li className="cursor-pointer" onClick={() => { handleNavClick(navigate, 'reviews'); toggleMenu(); }}>Reviews</li>
-            <li><Link to="/about" onClick={toggleMenu}>About</Link></li>
+            <li className="cursor-pointer" onClick={() => { handlePageNavClick('/about'); toggleMenu(); }}>About</li>
             <li className="cursor-pointer" onClick={() => { handleNavClick(navigate, 'contact'); toggleMenu(); }}>Contact</li>
-            <li><Link to="/jobs" onClick={toggleMenu}>Jobs</Link></li>
+            <li className="cursor-pointer" onClick={() => { handlePageNavClick('/jobs'); toggleMenu(); }}>Jobs</li>
             <li><Link to="/sign-in" onClick={toggleMenu}>Sign In</Link></li>
           </ul>
         )}
