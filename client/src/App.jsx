@@ -9,6 +9,9 @@ import Jobs from './pages/Jobs';
 import BookCleaning from './pages/BookCleaning';
 import SignInPage from './pages/SignInPage';
 import SignUp from './pages/SignUp';
+import AdminPortal from './pages/AdminPortal';  // Importing the Admin Portal page
+import CrewPortal from './pages/CrewPortal';    // Importing the Crew Portal page
+import ClientPortal from './pages/ClientPortal'; // Importing the Client Portal page
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
             <Route path="/book-cleaning" element={<BookCleaning />} />
             <Route path="/sign-in" element={<SignInPage />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/admin-portal" element={<AdminPortal />} />   {/* Admin Portal route */}
+            <Route path="/crew-portal" element={<CrewPortal />} />     {/* Crew Portal route */}
+            <Route path="/client-portal" element={<ClientPortal />} /> {/* Client Portal route */}
           </Routes>
         </main>
         <Footer />
