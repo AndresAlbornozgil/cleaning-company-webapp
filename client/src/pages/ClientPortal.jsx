@@ -21,11 +21,6 @@ const ClientPortal = () => {
     { id: 3, date: new Date(2024, 7, 10), address: '123 Maple Ave', feedback: '' },
   ]);
 
-  const [payments, setPayments] = useState([
-    { id: 1, amount: '$120', date: 'October 5, 4', status: 'Paid', invoiceUrl: 'https://example.com/invoice1' },
-    { id: 2, amount: '$150', date: 'September 20, 2024', status: 'Paid', invoiceUrl: 'https://example.com/invoice2' },
-  ]);
-
   const [selectedJob, setSelectedJob] = useState(null); // Track the selected job
   const [feedback, setFeedback] = useState(''); // Track feedback for the selected job
 
@@ -52,14 +47,13 @@ const ClientPortal = () => {
     alert('Feedback submitted successfully.');
   };
 
-  // Handle cancel and reschedule for current booking
+  // Handle cancel for current booking
   const handleCancelBooking = () => {
-    setCurrentBooking(null);
-    alert('Your booking has been canceled.');
-  };
-
-  const handleRescheduleBooking = () => {
-    alert('Reschedule functionality is currently unavailable.');
+    const confirmCancel = window.confirm('Are you sure you want to cancel this booking?');
+    if (confirmCancel) {
+      setCurrentBooking(null);  // Cancel the booking
+      alert('Your booking has been canceled.');
+    }
   };
 
   // Events for the calendar (convert jobs to events)
@@ -71,22 +65,14 @@ const ClientPortal = () => {
       end: job.date,
       color: 'blue', // Default color for past jobs
     })),
-    {
+    currentBooking && {
       id: currentBooking.id,
       title: currentBooking.address, // Display only the address
       start: currentBooking.date,
       end: currentBooking.date,
       color: 'green', // Green for current booking
     },
-  ];
-
-  // Toggle for payment history dropdown
-  const [selectedPayment, setSelectedPayment] = useState(null); // Track selected payment
-
-  const handlePaymentSelect = (paymentId) => {
-    const payment = payments.find((p) => p.id === paymentId);
-    setSelectedPayment(payment);
-  };
+  ].filter(Boolean);  // Filter out null values if there are no current bookings
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -110,9 +96,6 @@ const ClientPortal = () => {
             <div className="mt-4">
               <button className="bg-red-500 text-white px-4 py-2 rounded-lg mr-2" onClick={handleCancelBooking}>
                 Cancel Booking
-              </button>
-              <button className="bg-gray-500 text-white px-4 py-2 rounded-lg" onClick={handleRescheduleBooking}>
-                Reschedule Booking
               </button>
             </div>
           </div>
@@ -163,40 +146,6 @@ const ClientPortal = () => {
             </button>
           </div>
         )}
-
-        {/* Payment History */}
-        <div className="bg-white shadow-md p-6 mt-10 rounded-lg">
-          <h2 className="text-2xl font-bold mb-4">Payment History</h2>
-          <div className="mt-4">
-            <select
-              id="payment-select"
-              className="w-full p-2 border rounded-lg"
-              onChange={(e) => handlePaymentSelect(parseInt(e.target.value))}
-            >
-              <option value="">View Payment History</option>
-              {payments.map((payment) => (
-                <option key={payment.id} value={payment.id}>
-                  Invoice for {payment.date}
-                </option>
-              ))}
-            </select>
-
-            {selectedPayment && (
-              <div className="mt-4">
-                <p>
-                  <strong>Payment #{selectedPayment.id}</strong>
-                  <br />
-                  <strong>Amount:</strong> {selectedPayment.amount}
-                  <br />
-                  <strong>Status:</strong> {selectedPayment.status}
-                </p>
-                <a href={selectedPayment.invoiceUrl} target="_blank" rel="noopener noreferrer">
-                  <button className="bg-green-500 text-white px-4 py-2 rounded-lg">View Invoice</button>
-                </a>
-              </div>
-            )}
-          </div>
-        </div>
       </div>
     </div>
   );
