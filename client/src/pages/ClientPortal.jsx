@@ -22,7 +22,7 @@ const ClientPortal = () => {
   ]);
 
   const [payments, setPayments] = useState([
-    { id: 1, amount: '$120', date: 'October 5, 2024', status: 'Paid', invoiceUrl: 'https://example.com/invoice1' },
+    { id: 1, amount: '$120', date: 'October 5, 4', status: 'Paid', invoiceUrl: 'https://example.com/invoice1' },
     { id: 2, amount: '$150', date: 'September 20, 2024', status: 'Paid', invoiceUrl: 'https://example.com/invoice2' },
   ]);
 
@@ -66,14 +66,14 @@ const ClientPortal = () => {
   const events = [
     ...pastJobs.map((job) => ({
       id: job.id,
-      title: `Job at ${job.address}`,
+      title: job.address, // Display only the address
       start: job.date,
       end: job.date,
       color: 'blue', // Default color for past jobs
     })),
     {
       id: currentBooking.id,
-      title: `Current Booking at ${currentBooking.address}`,
+      title: currentBooking.address, // Display only the address
       start: currentBooking.date,
       end: currentBooking.date,
       color: 'green', // Green for current booking
@@ -81,7 +81,6 @@ const ClientPortal = () => {
   ];
 
   // Toggle for payment history dropdown
-  const [paymentDropdownOpen, setPaymentDropdownOpen] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState(null); // Track selected payment
 
   const handlePaymentSelect = (paymentId) => {
