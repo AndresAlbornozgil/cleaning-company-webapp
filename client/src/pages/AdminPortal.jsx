@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 // Mock Data for initial crew members, jobs, and estimates
 const initialCrew = [
-  { id: 1, name: 'Crew Member 1', email: 'crew1@example.com', hasAccount: true },
-  { id: 2, name: 'Crew Member 2', email: 'crew2@example.com', hasAccount: true },
+  { id: 1, name: 'Crew Member 1', email: 'crew1@example.com', phoneNumber: '123-456-7890' },
+  { id: 2, name: 'Crew Member 2', email: 'crew2@example.com', phoneNumber: '987-654-3210' },
 ];
 
 const initialJobs = [
@@ -21,7 +21,7 @@ const AdminPortal = () => {
   const [crew, setCrew] = useState(initialCrew); // State to manage crew members
   const [jobs, setJobs] = useState(initialJobs); // State to manage jobs
   const [estimates, setEstimates] = useState(initialEstimates); // State to manage estimates
-  const [newCrew, setNewCrew] = useState({ name: '', email: '', createAccount: false, password: '' }); // New crew form
+  const [newCrew, setNewCrew] = useState({ name: '', email: '', phoneNumber: '', password: '' }); // New crew form
 
   // Count pending estimates
   const pendingEstimatesCount = estimates.filter((estimate) => estimate.status === 'pending').length;
@@ -40,8 +40,8 @@ const AdminPortal = () => {
 
   // Handle adding new crew member
   const handleAddCrew = () => {
-    if (!newCrew.name || !newCrew.email) {
-      alert('Please provide both name and email for the crew member.');
+    if (!newCrew.name || !newCrew.email || !newCrew.phoneNumber || !newCrew.password) {
+      alert('Please provide name, email, phone number, and password for the crew member.');
       return;
     }
 
@@ -49,12 +49,12 @@ const AdminPortal = () => {
       id: crew.length + 1,
       name: newCrew.name,
       email: newCrew.email,
-      hasAccount: newCrew.createAccount,
-      password: newCrew.password, // Optional account creation
+      phoneNumber: newCrew.phoneNumber,
+      password: newCrew.password, // Account creation
     };
 
     setCrew([...crew, newMember]); // Add new member to crew
-    setNewCrew({ name: '', email: '', createAccount: false, password: '' }); // Reset form
+    setNewCrew({ name: '', email: '', phoneNumber: '', password: '' }); // Reset form
     alert(`Crew member ${newMember.name} added successfully.`);
   };
 
@@ -136,7 +136,7 @@ const AdminPortal = () => {
                   onClick={() => handleReviewEstimate(estimate.id)}
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg"
                 >
-                  Review Estimate
+                  Review
                 </button>
               )}
             </div>
@@ -197,42 +197,45 @@ const AdminPortal = () => {
         {/* Manage Crew Section */}
         <div className="bg-white shadow-md p-6 rounded-lg">
           <h2 className="text-2xl font-bold mb-4">Manage Crew</h2>
-          <div className="mb-4">
-            <label className="block text-gray-700">Name</label>
-            <input
-              type="text"
-              name="name"
-              value={newCrew.name}
-              onChange={handleInputChange}
-              className="w-full p-2 border border-gray-300 rounded mt-2"
-              placeholder="Enter crew member's name"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={newCrew.email}
-              onChange={handleInputChange}
-              className="w-full p-2 border border-gray-300 rounded mt-2"
-              placeholder="Enter crew member's email"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <input
-              type="checkbox"
-              name="createAccount"
-              checked={newCrew.createAccount}
-              onChange={handleInputChange}
-              className="mr-2"
-            />
-            <label className="text-gray-700">Create Account</label>
-          </div>
-          {newCrew.createAccount && (
-            <div className="mb-4">
+          <h3 className="text-xl font-semibold mt-8 mb-2">Add a New Crew Member</h3>
+          <div className="flex flex-wrap gap-4 mb-4">
+            <div className="flex-1">
+              <label className="block text-gray-700">Name</label>
+              <input
+                type="text"
+                name="name"
+                value={newCrew.name}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-gray-300 rounded mt-2"
+                placeholder="Enter crew member's name"
+                required
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-gray-700">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={newCrew.email}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-gray-300 rounded mt-2"
+                placeholder="Enter crew member's email"
+                required
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-gray-700">Phone Number</label>
+              <input
+                type="text"
+                name="phoneNumber"
+                value={newCrew.phoneNumber}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-gray-300 rounded mt-2"
+                placeholder="Enter crew member's phone number"
+                required
+              />
+            </div>
+            <div className="flex-1">
               <label className="block text-gray-700">Password</label>
               <input
                 type="password"
@@ -244,7 +247,7 @@ const AdminPortal = () => {
                 required
               />
             </div>
-          )}
+          </div>
           <button
             onClick={handleAddCrew}
             className="bg-green-500 text-white px-4 py-2 rounded-lg"
@@ -259,7 +262,7 @@ const AdminPortal = () => {
               <div>
                 <p><strong>Name:</strong> {member.name}</p>
                 <p><strong>Email:</strong> {member.email}</p>
-                <p><strong>Has Account:</strong> {member.hasAccount ? 'Yes' : 'No'}</p>
+                <p><strong>Phone Number:</strong> {member.phoneNumber}</p>
               </div>
               <button
                 onClick={() => handleRemoveCrew(member.id)}
