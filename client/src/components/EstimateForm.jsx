@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const EstimateForm = () => {
   const [formData, setFormData] = useState({
     name: '',
+    phoneNumber: '',
     email: '',
     service: '',
     notes: '',
@@ -49,6 +50,20 @@ const EstimateForm = () => {
         />
       </div>
 
+      {/* Phone Number */}
+      <div className="mb-4">
+        <label className="block text-gray-700">Phone Number</label>
+        <input
+          type="tel"
+          name="phoneNumber"
+          value={formData.phoneNumber}
+          onChange={handleChange}
+          className="w-full p-2 border border-gray-300 rounded mt-2"
+          placeholder="Enter your phone number"
+          required
+        />
+      </div>
+
       {/* Email */}
       <div className="mb-4">
         <label className="block text-gray-700">Email</label>
@@ -84,7 +99,7 @@ const EstimateForm = () => {
       {/* Image Upload Section */}
       <div className="mb-4">
         <label className="block text-gray-700">Upload Pictures (Required)</label>
-        <p className="text-sm text-gray-500">Please upload pictures of every room to help us provide an accurate estimate.</p>
+        <p className="text-sm text-gray-500">Please upload pictures of every room and main areas to help us provide an accurate estimate.</p>
         <input
           type="file"
           name="images"
