@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
-const BookingForm = () => {
+const EstimateForm = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    date: '',
     service: '',
+    notes: '',
+    images: []
   });
 
   const handleChange = (e) => {
@@ -16,15 +17,25 @@ const BookingForm = () => {
     }));
   };
 
+  const handleImageUpload = (e) => {
+    const files = Array.from(e.target.files);
+    setFormData((prevData) => ({
+      ...prevData,
+      images: files,
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Booking Submitted:', formData);
-    // You can handle form submission logic here, like sending data to a server
+    console.log('Estimate Request Submitted:', formData);
+    // Handle form submission logic (e.g., send data to a server)
   };
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-6 shadow-md rounded">
-      <h2 className="text-2xl font-bold mb-4">Book a Cleaning Service</h2>
+      <h2 className="text-2xl font-bold mb-4">Request a Free Estimate</h2>
+
+      {/* Name */}
       <div className="mb-4">
         <label className="block text-gray-700">Name</label>
         <input
@@ -37,6 +48,8 @@ const BookingForm = () => {
           required
         />
       </div>
+
+      {/* Email */}
       <div className="mb-4">
         <label className="block text-gray-700">Email</label>
         <input
@@ -49,17 +62,8 @@ const BookingForm = () => {
           required
         />
       </div>
-      <div className="mb-4">
-        <label className="block text-gray-700">Preferred Date</label>
-        <input
-          type="date"
-          name="date"
-          value={formData.date}
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded mt-2"
-          required
-        />
-      </div>
+
+      {/* Service Type */}
       <div className="mb-4">
         <label className="block text-gray-700">Service Type</label>
         <select
@@ -70,14 +74,46 @@ const BookingForm = () => {
           required
         >
           <option value="" disabled>Select a service</option>
-          <option value="basic-cleaning">Basic Cleaning</option>
-          <option value="deep-cleaning">Deep Cleaning</option>
-          <option value="move-in-out">Move-In/Out Cleaning</option>
+          <option value="commercial-cleaning">Commercial Cleaning</option>
+          <option value="basic-cleaning">Basic Cleaning (Residential)</option>
+          <option value="deep-cleaning">Deep Cleaning (Residential)</option>
+          <option value="move-in-out">Move-In/Out Cleaning (Residential)</option>
         </select>
       </div>
-      <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded mt-4">Submit</button>
+
+      {/* Image Upload Section */}
+      <div className="mb-4">
+        <label className="block text-gray-700">Upload Pictures (Required)</label>
+        <p className="text-sm text-gray-500">Please upload pictures of every room to help us provide an accurate estimate.</p>
+        <input
+          type="file"
+          name="images"
+          onChange={handleImageUpload}
+          className="w-full p-2 border border-gray-300 rounded mt-2"
+          multiple
+          accept="image/*"
+          required
+        />
+      </div>
+
+      {/* Notes Section */}
+      <div className="mb-4">
+        <label className="block text-gray-700">Additional Notes</label>
+        <textarea
+          name="notes"
+          value={formData.notes}
+          onChange={handleChange}
+          className="w-full p-2 border border-gray-300 rounded mt-2"
+          placeholder="Example: Indicate areas that need extra attention"
+        />
+      </div>
+
+      {/* Submit Button */}
+      <button type="submit" className="w-full bg-green-600 text-white p-2 rounded mt-4">
+        Request Free Estimate
+      </button>
     </form>
   );
 };
 
-export default BookingForm;
+export default EstimateForm;
