@@ -9,16 +9,18 @@ import Jobs from './pages/Jobs';
 import BookCleaning from './pages/BookCleaning';
 import SignInPage from './pages/SignInPage';
 import SignUp from './pages/SignUp';
-import AdminPortal from './pages/AdminPortal'; // Ensure this import is correct
-import ConfirmBooking from './pages/ConfirmBooking';
+import ConfirmBooking from './pages/ConfirmBooking'; // Newly added ConfirmBooking page
+import AdminPortal from './pages/AdminPortal'; // Newly added Admin Portal
 
 function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <main className="flex-grow pt-16"> {/* Add padding to account for fixed header */}
+        {/* Add a top padding equal to the header's height */}
+        <main className="flex-grow pt-16">
           <Routes>
+            {/* HomePage and Sections */}
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<Services />} />
             <Route path="/about" element={<About />} />
@@ -26,8 +28,9 @@ function App() {
             <Route path="/book-cleaning" element={<BookCleaning />} />
             <Route path="/sign-in" element={<SignInPage />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/admin-portal" element={<AdminPortal />} /> {/* Changed route to /admin-portal */}
-            <Route path="/confirm-booking/:estimateId" element={<ConfirmBooking />} /> {/* Confirm Booking */}
+            <Route path="/confirm-booking/:estimateId" element={<ConfirmBooking />} />
+            {/* Admin Portal */}
+            <Route path="/admin-portal" element={<AdminPortal />} />
           </Routes>
         </main>
         <Footer />

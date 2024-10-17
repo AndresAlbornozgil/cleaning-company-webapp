@@ -1,40 +1,101 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+
+// Mock Data for initial crew members, jobs, and estimates
+const initialCrew = [
+  { id: 1, name: 'Crew Member 1', email: 'crew1@example.com', hasAccount: true },
+  { id: 2, name: 'Crew Member 2', email: 'crew2@example.com', hasAccount: true },
+];
+
+const initialJobs = [
+  { id: 1, clientName: 'John Doe', address: '123 Main St', status: 'pending', crewAssigned: null, date: '2024-10-22', time: '10:00 AM' },
+  { id: 2, clientName: 'Jane Smith', address: '456 Maple Ave', status: 'assigned', crewAssigned: 1, date: '2024-10-23', time: '2:00 PM' },
+  { id: 3, clientName: 'Paul White', address: '789 Oak St', status: 'assigned', crewAssigned: 2, date: '2024-10-25', time: '9:00 AM' },
+];
+
+const initialEstimates = [
+  { id: 1, clientName: 'Alice Johnson', serviceType: 'Deep Cleaning', estimateDetails: '3 rooms, 2 bathrooms', status: 'pending', date: '2024-10-21' },
+  { id: 2, clientName: 'Bob Brown', serviceType: 'Move-In/Out Cleaning', estimateDetails: '4 rooms, 3 bathrooms', status: 'pending', date: '2024-10-24' },
+];
 
 const AdminPortal = () => {
-  const [estimates, setEstimates] = useState([]);
-  const [price, setPrice] = useState(''); // Admin sets price
-  const [selectedEstimate, setSelectedEstimate] = useState(null);
+  const [crew, setCrew] = useState(initialCrew); // State to manage crew members
+  const [jobs, setJobs] = useState(initialJobs); // State to manage jobs
+  const [estimates, setEstimates] = useState(initialEstimates); // State to manage estimates
+  const [newCrew, setNewCrew] = useState({ name: '', email: '', createAccount: false, password: '' }); // New crew form
 
-  useEffect(() => {
-    // Fetch the list of estimates from the server
-    const fetchEstimates = async () => {
-      const response = await fetch('/api/estimates'); // Example API call
-      const data = await response.json();
-      setEstimates(data);
-    };
-    fetchEstimates();
-  }, []);
+  // Count pending estimates
+  const pendingEstimatesCount = estimates.filter((estimate) => estimate.status === 'pending').length;
+  
+  // Count total tasks (all jobs)
+  const totalTasksCount = jobs.length;
 
-  // Handle price submission and send booking form via email
-  const sendBookingForm = async (estimateId, clientEmail) => {
-    try {
-      const response = await fetch(`/api/send-booking-form/${estimateId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ price, clientEmail }),
-      });
+  // Handle input changes in the "Add New Crew Member" form
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setNewCrew({
+      ...newCrew,
+      [name]: type === 'checkbox' ? checked : value,
+    });
+  };
 
-      if (response.ok) {
-        alert('Booking form with price sent to the client via email.');
-      } else {
-        alert('Failed to send booking form.');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred.');
+  // Handle adding new crew member
+  const handleAddCrew = () => {
+    if (!newCrew.name || !newCrew.email) {
+      alert('Please provide both name and email for the crew member.');
+      return;
     }
+
+    const newMember = {
+      id: crew.length + 1,
+      name: newCrew.name,
+      email: newCrew.email,
+      hasAccount: newCrew.createAccount,
+      password: newCrew.password, // Optional account creation
+    };
+
+    setCrew([...crew, newMember]); // Add new member to crew
+    setNewCrew({ name: '', email: '', createAccount: false, password: '' }); // Reset form
+    alert(`Crew member ${newMember.name} added successfully.`);
+  };
+
+  // Handle removing crew member
+  const handleRemoveCrew = (crewId) => {
+    setCrew(crew.filter((member) => member.id !== crewId));
+    alert('Crew member removed.');
+  };
+
+  // Handle assigning a job to a crew member
+  const handleAssignJob = (jobId, crewId) => {
+    const updatedJobs = jobs.map((job) =>
+      job.id === jobId ? { ...job, crewAssigned: crewId, status: 'assigned' } : job
+    );
+    setJobs(updatedJobs);
+    alert('Job assigned successfully.');
+  };
+
+  // Handle unassigning a job from a crew member
+  const handleUnassignJob = (jobId) => {
+    const updatedJobs = jobs.map((job) =>
+      job.id === jobId ? { ...job, crewAssigned: null, status: 'pending' } : job
+    );
+    setJobs(updatedJobs);
+    alert('Job unassigned successfully.');
+  };
+
+  // Handle reviewing an estimate
+  const handleReviewEstimate = (estimateId) => {
+    const updatedEstimates = estimates.map((estimate) =>
+      estimate.id === estimateId ? { ...estimate, status: 'reviewed' } : estimate
+    );
+    setEstimates(updatedEstimates);
+    alert('Estimate reviewed successfully.');
+  };
+
+  // Handle marking job as completed
+  const handleMarkCompleted = (jobId) => {
+    const updatedJobs = jobs.filter((job) => job.id !== jobId); // Remove job from list
+    setJobs(updatedJobs);
+    alert('Job marked as completed.');
   };
 
   return (
@@ -43,111 +104,172 @@ const AdminPortal = () => {
         <h1 className="text-4xl font-bold text-center mb-8">Admin Portal</h1>
 
         {/* Dashboard Overview */}
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-3 gap-6 mb-10">
           <div className="bg-white shadow-md p-6 rounded-lg text-center">
-            <h2 className="text-2xl font-bold">Total Jobs</h2>
-            <p className="text-gray-600 mt-2">45 jobs completed</p>
+            <h2 className="text-2xl font-bold">Estimates</h2>
+            <p className="text-gray-600 mt-2">{pendingEstimatesCount}</p>
           </div>
           <div className="bg-white shadow-md p-6 rounded-lg text-center">
-            <h2 className="text-2xl font-bold">Active Contractors</h2>
-            <p className="text-gray-600 mt-2">8 contractors online</p>
+            <h2 className="text-2xl font-bold">Tasks</h2>
+            <p className="text-gray-600 mt-2">{totalTasksCount}</p>
           </div>
           <div className="bg-white shadow-md p-6 rounded-lg text-center">
-            <h2 className="text-2xl font-bold">Total Revenue</h2>
-            <p className="text-gray-600 mt-2">$12,500</p>
+            <h2 className="text-2xl font-bold">Crew</h2>
+            <p className="text-gray-600 mt-2">{crew.length}</p>
           </div>
-        </div>
-
-        {/* Job Management */}
-        <div className="bg-white shadow-md p-6 mt-10 rounded-lg">
-          <h2 className="text-2xl font-bold mb-4">Manage Jobs</h2>
-          <p>View, assign, and manage cleaning jobs.</p>
-          <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg">Create New Job</button>
-        </div>
-
-        {/* Contractor Management */}
-        <div className="bg-white shadow-md p-6 mt-10 rounded-lg">
-          <h2 className="text-2xl font-bold mb-4">Manage Contractors</h2>
-          <p>View contractor performance, assign jobs, and manage their details.</p>
-          <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg">Add New Contractor</button>
-        </div>
-
-        {/* Financial Overview */}
-        <div className="bg-white shadow-md p-6 mt-10 rounded-lg">
-          <h2 className="text-2xl font-bold mb-4">Financial Overview</h2>
-          <p>Track revenue, expenses, and generate invoices.</p>
-          <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg">View Financials</button>
         </div>
 
         {/* Review Estimates Section */}
-        <div className="bg-white shadow-md p-6 mt-10 rounded-lg">
+        <div className="bg-white shadow-md p-6 rounded-lg mb-10">
           <h2 className="text-2xl font-bold mb-4">Review Estimates</h2>
-          <table className="min-w-full bg-white">
-            <thead>
-              <tr>
-                <th className="py-2 px-4 border">Client Name</th>
-                <th className="py-2 px-4 border">Service Type</th>
-                <th className="py-2 px-4 border">Email</th>
-                <th className="py-2 px-4 border">Submitted</th>
-                <th className="py-2 px-4 border">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {estimates.map((estimate) => (
-                <tr key={estimate.id}>
-                  <td className="py-2 px-4 border">{estimate.name}</td>
-                  <td className="py-2 px-4 border">{estimate.service}</td>
-                  <td className="py-2 px-4 border">{estimate.email}</td>
-                  <td className="py-2 px-4 border">{new Date(estimate.date).toLocaleDateString()}</td>
-                  <td className="py-2 px-4 border">
-                    <button
-                      className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-                      onClick={() => setSelectedEstimate(estimate)}
-                    >
-                      Review
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          {estimates.map((estimate) => (
+            <div key={estimate.id} className="flex justify-between items-center p-4 border-b">
+              <div>
+                <p><strong>Client Name:</strong> {estimate.clientName}</p>
+                <p><strong>Service Type:</strong> {estimate.serviceType}</p>
+                <p><strong>Details:</strong> {estimate.estimateDetails}</p>
+                <p><strong>Date:</strong> {estimate.date}</p>
+                <p><strong>Status:</strong> {estimate.status === 'pending' ? 'Pending Review' : 'Reviewed'}</p>
+              </div>
+              {estimate.status === 'pending' && (
+                <button
+                  onClick={() => handleReviewEstimate(estimate.id)}
+                  className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                >
+                  Review Estimate
+                </button>
+              )}
+            </div>
+          ))}
         </div>
 
-        {/* Modal to review estimate and set price */}
-        {selectedEstimate && (
-          <div className="modal bg-white p-6 shadow-md rounded-lg">
-            <h3 className="text-2xl font-bold mb-4">Review Estimate for {selectedEstimate.name}</h3>
-            <p>Service: {selectedEstimate.service}</p>
-            <p>Notes: {selectedEstimate.notes}</p>
-            <div>
-              <h4 className="text-lg font-bold">Uploaded Pictures:</h4>
-              {selectedEstimate.images.map((image, index) => (
-                <img key={index} src={image.url} alt="Room" className="w-24 h-24" />
-              ))}
+        {/* Assign Tasks Section */}
+        <div className="bg-white shadow-md p-6 rounded-lg mb-10">
+          <h2 className="text-2xl font-bold mb-4">Assign Tasks</h2>
+          {jobs.map((job) => (
+            <div key={job.id} className="flex justify-between items-center p-4 border-b">
+              <div>
+                <p><strong>Client Name:</strong> {job.clientName}</p>
+                <p><strong>Address:</strong> {job.address}</p>
+                <p><strong>Date:</strong> {job.date}</p>
+                <p><strong>Time:</strong> {job.time}</p>
+                <p><strong>Status:</strong> {job.status === 'pending' ? 'Pending Assignment' : 'Assigned'}</p>
+                {job.crewAssigned && (
+                  <div>
+                    <p><strong>Assigned To:</strong> {crew.find((c) => c.id === job.crewAssigned)?.name}</p>
+                    <button
+                      onClick={() => handleMarkCompleted(job.id)}
+                      className="bg-green-500 text-white px-4 py-2 mt-2 rounded-lg"
+                    >
+                      Mark Completed
+                    </button>
+                  </div>
+                )}
+              </div>
+              {job.status === 'pending' ? (
+                <div>
+                  <select
+                    onChange={(e) => handleAssignJob(job.id, e.target.value)}
+                    className="p-2 border border-gray-300 rounded"
+                  >
+                    <option value="" disabled selected>
+                      Assign to
+                    </option>
+                    {crew.map((member) => (
+                      <option key={member.id} value={member.id}>
+                        {member.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                <button
+                  onClick={() => handleUnassignJob(job.id)}
+                  className="bg-red-600 text-white px-4 py-2 rounded-lg"
+                >
+                  Unassign
+                </button>
+              )}
             </div>
-            <div className="mt-4">
-              <label className="block text-gray-700">Set Price: </label>
+          ))}
+        </div>
+
+        {/* Manage Crew Section */}
+        <div className="bg-white shadow-md p-6 rounded-lg">
+          <h2 className="text-2xl font-bold mb-4">Manage Crew</h2>
+          <div className="mb-4">
+            <label className="block text-gray-700">Name</label>
+            <input
+              type="text"
+              name="name"
+              value={newCrew.name}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded mt-2"
+              placeholder="Enter crew member's name"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Email</label>
+            <input
+              type="email"
+              name="email"
+              value={newCrew.email}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded mt-2"
+              placeholder="Enter crew member's email"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <input
+              type="checkbox"
+              name="createAccount"
+              checked={newCrew.createAccount}
+              onChange={handleInputChange}
+              className="mr-2"
+            />
+            <label className="text-gray-700">Create Account</label>
+          </div>
+          {newCrew.createAccount && (
+            <div className="mb-4">
+              <label className="block text-gray-700">Password</label>
               <input
-                type="text"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                type="password"
+                name="password"
+                value={newCrew.password}
+                onChange={handleInputChange}
                 className="w-full p-2 border border-gray-300 rounded mt-2"
+                placeholder="Set a password"
+                required
               />
             </div>
-            <button
-              className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg"
-              onClick={() => sendBookingForm(selectedEstimate.id, selectedEstimate.email)}
-            >
-              Send Booking Form
-            </button>
-            <button
-              className="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg"
-              onClick={() => setSelectedEstimate(null)}
-            >
-              Close
-            </button>
-          </div>
-        )}
+          )}
+          <button
+            onClick={handleAddCrew}
+            className="bg-green-500 text-white px-4 py-2 rounded-lg"
+          >
+            Add Crew Member
+          </button>
+
+          {/* Crew Member List */}
+          <h3 className="text-xl font-semibold mt-8 mb-2">Current Crew Members</h3>
+          {crew.map((member) => (
+            <div key={member.id} className="flex justify-between items-center p-4 border-b">
+              <div>
+                <p><strong>Name:</strong> {member.name}</p>
+                <p><strong>Email:</strong> {member.email}</p>
+                <p><strong>Has Account:</strong> {member.hasAccount ? 'Yes' : 'No'}</p>
+              </div>
+              <button
+                onClick={() => handleRemoveCrew(member.id)}
+                className="bg-red-600 text-white px-4 py-2 rounded-lg"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
