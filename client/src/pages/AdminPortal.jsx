@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import moment from 'moment';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 // Mock Data for initial crew members, jobs, and estimates
 const initialCrew = [
@@ -7,9 +10,9 @@ const initialCrew = [
 ];
 
 const initialJobs = [
-  { id: 1, clientName: 'John Doe', address: '123 Main St', status: 'pending', crewAssigned: null, date: '2024-10-22', time: '10:00 AM' },
-  { id: 2, clientName: 'Jane Smith', address: '456 Maple Ave', status: 'assigned', crewAssigned: 1, date: '2024-10-23', time: '2:00 PM' },
-  { id: 3, clientName: 'Paul White', address: '789 Oak St', status: 'assigned', crewAssigned: 2, date: '2024-10-25', time: '9:00 AM' },
+  { id: 1, clientName: 'John Doe', address: '123 Main St', phoneNumber: '555-1234', status: 'pending', crewAssigned: null, date: '2024-10-22', time: '10:00 AM', notes: 'Entry gate code: 1234' },
+  { id: 2, clientName: 'Jane Smith', address: '456 Maple Ave', phoneNumber: '555-5678', status: 'assigned', crewAssigned: 1, date: '2024-10-23', time: '2:00 PM', notes: 'Call on arrival' },
+  { id: 3, clientName: 'Paul White', address: '789 Oak St', phoneNumber: '555-4321', status: 'assigned', crewAssigned: 2, date: '2024-10-25', time: '9:00 AM', notes: '' },
 ];
 
 const initialEstimates = [
@@ -22,19 +25,35 @@ const AdminPortal = () => {
   const [jobs, setJobs] = useState(initialJobs); // State to manage jobs
   const [estimates, setEstimates] = useState(initialEstimates); // State to manage estimates
   const [newCrew, setNewCrew] = useState({ name: '', email: '', phoneNumber: '', password: '' }); // New crew form
+  const [newJob, setNewJob] = useState({ clientName: '', phoneNumber: '', address: '', date: '', time: '', notes: '', status: 'pending' });
 
-  // Count pending estimates
-  const pendingEstimatesCount = estimates.filter((estimate) => estimate.status === 'pending').length;
-  
-  // Count total tasks (all jobs)
-  const totalTasksCount = jobs.length;
+  const localizer = momentLocalizer(moment);
+
+  // Convert jobs to calendar events
+  const jobEvents = jobs
+    .filter((job) => job.status === 'assigned')
+    .map((job) => ({
+      title: `${crew.find((c) => c.id === job.crewAssigned)?.name}`,
+      start: new Date(`${job.date} ${job.time}`),
+      end: new Date(`${job.date} ${job.time}`),
+      allDay: false,
+    }));
 
   // Handle input changes in the "Add New Crew Member" form
   const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setNewCrew({
       ...newCrew,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: value,
+    });
+  };
+
+  // Handle input changes for new job
+  const handleJobInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewJob({
+      ...newJob,
+      [name]: value,
     });
   };
 
@@ -50,7 +69,7 @@ const AdminPortal = () => {
       name: newCrew.name,
       email: newCrew.email,
       phoneNumber: newCrew.phoneNumber,
-      password: newCrew.password, // Account creation
+      password: newCrew.password,
     };
 
     setCrew([...crew, newMember]); // Add new member to crew
@@ -58,10 +77,34 @@ const AdminPortal = () => {
     alert(`Crew member ${newMember.name} added successfully.`);
   };
 
-  // Handle removing crew member
-  const handleRemoveCrew = (crewId) => {
-    setCrew(crew.filter((member) => member.id !== crewId));
-    alert('Crew member removed.');
+  // Handle adding new task (job)
+  const handleAddJob = () => {
+    if (!newJob.clientName || !newJob.phoneNumber || !newJob.address || !newJob.date || !newJob.time) {
+      alert('Please fill out all fields to add a task.');
+      return;
+    }
+
+    const newTask = {
+      id: jobs.length + 1,
+      clientName: newJob.clientName,
+      phoneNumber: newJob.phoneNumber,
+      address: newJob.address,
+      date: newJob.date,
+      time: newJob.time,
+      notes: newJob.notes,
+      status: 'pending',
+      crewAssigned: null,
+    };
+
+    setJobs([...jobs, newTask]); // Add new job
+    setNewJob({ clientName: '', phoneNumber: '', address: '', date: '', time: '', notes: '', status: 'pending' }); // Reset form
+    alert('New task added successfully.');
+  };
+
+  // Handle removing a job (task)
+  const handleRemoveJob = (jobId) => {
+    setJobs(jobs.filter((job) => job.id !== jobId));
+    alert('Task removed.');
   };
 
   // Handle assigning a job to a crew member
@@ -82,6 +125,13 @@ const AdminPortal = () => {
     alert('Job unassigned successfully.');
   };
 
+  // Handle marking job as completed
+  const handleMarkCompleted = (jobId) => {
+    const updatedJobs = jobs.filter((job) => job.id !== jobId); // Remove job from list
+    setJobs(updatedJobs);
+    alert('Job marked as completed.');
+  };
+
   // Handle reviewing an estimate
   const handleReviewEstimate = (estimateId) => {
     const updatedEstimates = estimates.map((estimate) =>
@@ -91,27 +141,20 @@ const AdminPortal = () => {
     alert('Estimate reviewed successfully.');
   };
 
-  // Handle marking job as completed
-  const handleMarkCompleted = (jobId) => {
-    const updatedJobs = jobs.filter((job) => job.id !== jobId); // Remove job from list
-    setJobs(updatedJobs);
-    alert('Job marked as completed.');
-  };
-
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto p-8">
-        <h1 className="text-4xl font-bold text-center mb-8">Admin Portal</h1>
+        <h1 className="text-4xl font-bold text-center mb-8">Business Manager Dashboard</h1>
 
         {/* Dashboard Overview */}
-        <div className="grid grid-cols-3 gap-6 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           <div className="bg-white shadow-md p-6 rounded-lg text-center">
             <h2 className="text-2xl font-bold">Estimates</h2>
-            <p className="text-gray-600 mt-2">{pendingEstimatesCount}</p>
+            <p className="text-gray-600 mt-2">{estimates.filter((estimate) => estimate.status === 'pending').length}</p>
           </div>
           <div className="bg-white shadow-md p-6 rounded-lg text-center">
             <h2 className="text-2xl font-bold">Tasks</h2>
-            <p className="text-gray-600 mt-2">{totalTasksCount}</p>
+            <p className="text-gray-600 mt-2">{jobs.length}</p>
           </div>
           <div className="bg-white shadow-md p-6 rounded-lg text-center">
             <h2 className="text-2xl font-bold">Crew</h2>
@@ -119,37 +162,111 @@ const AdminPortal = () => {
           </div>
         </div>
 
-        {/* Review Estimates Section */}
+        {/* Schedule Section */}
         <div className="bg-white shadow-md p-6 rounded-lg mb-10">
-          <h2 className="text-2xl font-bold mb-4">Review Estimates</h2>
-          {estimates.map((estimate) => (
-            <div key={estimate.id} className="flex justify-between items-center p-4 border-b">
-              <div>
-                <p><strong>Client Name:</strong> {estimate.clientName}</p>
-                <p><strong>Service Type:</strong> {estimate.serviceType}</p>
-                <p><strong>Details:</strong> {estimate.estimateDetails}</p>
-                <p><strong>Date:</strong> {estimate.date}</p>
-                <p><strong>Status:</strong> {estimate.status === 'pending' ? 'Pending Review' : 'Reviewed'}</p>
-              </div>
-              {estimate.status === 'pending' && (
-                <button
-                  onClick={() => handleReviewEstimate(estimate.id)}
-                  className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-                >
-                  Review
-                </button>
-              )}
-            </div>
-          ))}
+          <h2 className="text-2xl font-bold mb-4">Schedule</h2>
+          <Calendar
+            localizer={localizer}
+            events={jobEvents}
+            startAccessor="start"
+            endAccessor="end"
+            style={{ height: 400 }}
+          />
         </div>
 
         {/* Assign Tasks Section */}
         <div className="bg-white shadow-md p-6 rounded-lg mb-10">
           <h2 className="text-2xl font-bold mb-4">Assign Tasks</h2>
+          <h3 className="text-xl font-semibold mt-8 mb-2">Assign a New Task</h3>
+          <div className="flex flex-wrap gap-4 mb-4">
+            <div className="flex-1">
+              <label className="block text-gray-700">Client Name</label>
+              <input
+                type="text"
+                name="clientName"
+                value={newJob.clientName}
+                onChange={handleJobInputChange}
+                className="w-full p-2 border border-gray-300 rounded mt-2"
+                placeholder="Enter client's name"
+                required
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-gray-700">Phone Number</label>
+              <input
+                type="text"
+                name="phoneNumber"
+                value={newJob.phoneNumber}
+                onChange={handleJobInputChange}
+                className="w-full p-2 border border-gray-300 rounded mt-2"
+                placeholder="Enter phone number"
+                required
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-gray-700">Address</label>
+              <input
+                type="text"
+                name="address"
+                value={newJob.address}
+                onChange={handleJobInputChange}
+                className="w-full p-2 border border-gray-300 rounded mt-2"
+                placeholder="Enter address"
+                required
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-gray-700">Date</label>
+              <input
+                type="date"
+                name="date"
+                value={newJob.date}
+                onChange={handleJobInputChange}
+                className="w-full p-2 border border-gray-300 rounded mt-2"
+                required
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-gray-700">Time</label>
+              <select
+                name="time"
+                value={newJob.time}
+                onChange={handleJobInputChange}
+                className="w-full p-2 border border-gray-300 rounded mt-2"
+                required
+              >
+                <option value="" disabled>Select a time</option>
+                {['8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'].map((time) => (
+                  <option key={time} value={time}>{time}</option>
+                ))}
+              </select>
+            </div>
+            <div className="flex-1">
+              <label className="block text-gray-700">Notes</label>
+              <textarea
+                name="notes"
+                value={newJob.notes}
+                onChange={handleJobInputChange}
+                className="w-full p-2 border border-gray-300 rounded mt-2"
+                placeholder="Any special instructions or notes..."
+                rows="2"
+              />
+            </div>
+          </div>
+          <button
+            onClick={handleAddJob}
+            className="bg-green-500 text-white px-4 py-2 rounded-lg"
+          >
+            Add Task
+          </button>
+
+          {/* Current Tasks */}
+          <h3 className="text-xl font-semibold mt-8 mb-2">Current Tasks</h3>
           {jobs.map((job) => (
             <div key={job.id} className="flex justify-between items-center p-4 border-b">
               <div>
                 <p><strong>Client Name:</strong> {job.clientName}</p>
+                <p><strong>Phone Number:</strong> {job.phoneNumber}</p>
                 <p><strong>Address:</strong> {job.address}</p>
                 <p><strong>Date:</strong> {job.date}</p>
                 <p><strong>Time:</strong> {job.time}</p>
@@ -166,8 +283,8 @@ const AdminPortal = () => {
                   </div>
                 )}
               </div>
-              {job.status === 'pending' ? (
-                <div>
+              <div>
+                {job.status === 'pending' ? (
                   <select
                     onChange={(e) => handleAssignJob(job.id, e.target.value)}
                     className="p-2 border border-gray-300 rounded"
@@ -181,15 +298,21 @@ const AdminPortal = () => {
                       </option>
                     ))}
                   </select>
-                </div>
-              ) : (
+                ) : (
+                  <button
+                    onClick={() => handleUnassignJob(job.id)}
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+                  >
+                    Unassign
+                  </button>
+                )}
                 <button
-                  onClick={() => handleUnassignJob(job.id)}
-                  className="bg-red-600 text-white px-4 py-2 rounded-lg"
+                  onClick={() => handleRemoveJob(job.id)}
+                  className="bg-red-600 text-white px-4 py-2 ml-2 rounded-lg"
                 >
-                  Unassign
+                  Remove
                 </button>
-              )}
+              </div>
             </div>
           ))}
         </div>
