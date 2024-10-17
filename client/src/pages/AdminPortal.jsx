@@ -317,6 +317,30 @@ const AdminPortal = () => {
           ))}
         </div>
 
+        {/* Review Estimates Section */}
+        <div className="bg-white shadow-md p-6 rounded-lg mb-10">
+          <h2 className="text-2xl font-bold mb-4">Review Estimates</h2>
+          {estimates.map((estimate) => (
+            <div key={estimate.id} className="flex justify-between items-center p-4 border-b">
+              <div>
+                <p><strong>Client Name:</strong> {estimate.clientName}</p>
+                <p><strong>Service Type:</strong> {estimate.serviceType}</p>
+                <p><strong>Details:</strong> {estimate.estimateDetails}</p>
+                <p><strong>Date:</strong> {estimate.date}</p>
+                <p><strong>Status:</strong> {estimate.status === 'pending' ? 'Pending Review' : 'Reviewed'}</p>
+              </div>
+              {estimate.status === 'pending' && (
+                <button
+                  onClick={() => handleReviewEstimate(estimate.id)}
+                  className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                >
+                  Review
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+
         {/* Manage Crew Section */}
         <div className="bg-white shadow-md p-6 rounded-lg">
           <h2 className="text-2xl font-bold mb-4">Manage Crew</h2>
