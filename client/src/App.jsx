@@ -11,6 +11,8 @@ import SignInPage from './pages/SignInPage';
 import SignUp from './pages/SignUp';
 import ConfirmBooking from './pages/ConfirmBooking'; // Newly added ConfirmBooking page
 import AdminPortal from './pages/AdminPortal'; // Newly added Admin Portal
+import ClientPortal from './pages/ClientPortal';
+import CrewPortal from './pages/CrewPortal';
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
             <Route path="/confirm-booking/:estimateId" element={<ConfirmBooking />} />
             {/* Admin Portal */}
             <Route path="/admin-portal" element={<AdminPortal />} />
+            <Route path="/client-portal" element={<ClientPortal />} />
+            <Route path="/crew-portal" element={<CrewPortal />} />
           </Routes>
         </main>
         <Footer />
