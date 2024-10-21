@@ -39,7 +39,7 @@ const Jobs = () => {
                 creating a brighter, cleaner future for everyone.
               </p>
 
-              <button className="mt-6 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-blue-700">
+              <button className="mt-6 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg">
                 Apply Here
               </button>
             </div>

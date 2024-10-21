@@ -262,7 +262,7 @@ const BookCleaning = () => {
 
         <button
           type="submit"
-          className="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600"
+          className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-600"
         >
           Book Cleaning
         </button>
