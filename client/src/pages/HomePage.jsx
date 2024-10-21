@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import mrSqueakyImage from '../assets/Mr. Squeaky Clean Solutions LLC.jpg'; // Import the image
+import bedroomImage from '../assets/beforeAfterBedroom.jpg';
+import bathroomImage from '../assets/beforeAfterBathroom.jpg';
+import livingRoomImage from '../assets/beforeAfterLivingRoom.jpg';
+import kitchenImage from '../assets/beforeAfterKitchen.jpg';
+import officeImage from '../assets/beforeAfterOffice.jpg';
 
 const HomePage = () => {
   const workImages = [
-    { src: mrSqueakyImage, alt: "Cleaned Living Room" },
-    { src: "/images/work2.jpg", alt: "Spotless Kitchen" },
-    { src: "/images/work3.jpg", alt: "Office Space" },
-    { src: "/images/work4.jpg", alt: "Sparkling Bathroom" },
+    { src: bedroomImage, alt: "Before and After Bedroom Image" },
+    { src: bathroomImage, alt: "Before and After Bathroom Image" },
+    { src: livingRoomImage, alt: "Before and After LivingRoom Image" },
+    { src: kitchenImage, alt: "Before and After Kitchen Image" },
+    { src: officeImage, alt: "Before and After Office Image" },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -33,17 +38,40 @@ const HomePage = () => {
     setIsModalOpen(false);
   };
 
-  // Auto-slide every 3 seconds when the modal is not open
+  // Auto-slide every 4 seconds when the modal is not open
   useEffect(() => {
     if (isModalOpen) return; // Don't auto-slide if the modal is open
 
     const interval = setInterval(() => {
       handleNext();
-    }, 3000);
+    }, 4000);
 
     // Clear the interval when the component unmounts or modal opens
     return () => clearInterval(interval);
   }, [currentIndex, isModalOpen]);
+
+  const reviews = [
+    {
+      name: "Jessica Miller",
+      feedback: "Mr. Squeaky Clean did an amazing job with our home! We had just moved in, and they made sure everything was spotless. Highly recommended!",
+    },
+    {
+      name: "Carlos Ramirez",
+      feedback: "Great service! The team was punctual, professional, and left our office looking better than ever. Will definitely be using them again.",
+    },
+    {
+      name: "Samantha Lee",
+      feedback: "I've tried other cleaning companies, but none compare to Mr. Squeaky Clean. They pay attention to every detail and are always reliable.",
+    },
+    {
+      name: "Michael Johnson",
+      feedback: "Fantastic service! Very thorough and the staff is super friendly. My house has never looked so clean!",
+    },
+    {
+      name: "Emily Thompson",
+      feedback: "I booked them for a deep cleaning before hosting a party, and they did not disappoint. The place was sparkling! Thank you!",
+    },
+  ];
 
   return (
     <div>
@@ -70,13 +98,13 @@ const HomePage = () => {
           />
           <button
             onClick={handlePrev}
-            className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-800 hover:text-black text-5xl"
+            className="absolute top-1/2 -left-8 transform -translate-y-1/2 text-gray-800 hover:text-black text-5xl"
           >
             &#10094;
           </button>
           <button
             onClick={handleNext}
-            className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-800 hover:text-black text-5xl"
+            className="absolute top-1/2 -right-8 transform -translate-y-1/2 text-gray-800 hover:text-black text-5xl"
           >
             &#10095;
           </button>
@@ -85,18 +113,18 @@ const HomePage = () => {
 
       {/* Modal for Viewing Images */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
           <button
             onClick={closeModal}
             className="absolute top-4 right-4 text-white text-2xl"
           >
             &times;
           </button>
-          <div className="relative w-full max-w-4xl">
+          <div className="relative w-full max-w-6xl flex items-center justify-center">
             <img
               src={workImages[currentIndex].src}
               alt={workImages[currentIndex].alt}
-              className="w-full h-auto max-h-screen object-contain rounded-md"
+              className="w-auto h-auto max-h-screen object-contain rounded-md"
             />
             <button
               onClick={handlePrev}
@@ -114,11 +142,19 @@ const HomePage = () => {
         </div>
       )}
 
-      {/* Reviews Section - Centered content */}
-      <section id="reviews" className="min-h-screen bg-gray-100 py-16 flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-4xl font-bold mb-6">Reviews</h2>
-          <p>Customer reviews and testimonials.</p>
+      {/* Reviews Section - Enhanced Content */}
+      <section id="reviews" className="min-h-screen bg-gray-100 py-16">
+        <div className="text-center mb-8">
+          <h2 className="text-4xl font-bold mb-6">Customer Reviews</h2>
+          <p className="text-lg mb-4">See what our satisfied clients have to say!</p>
+        </div>
+        <div className="flex flex-wrap justify-center">
+          {reviews.map((review, index) => (
+            <div key={index} className="bg-white shadow-lg rounded-lg p-6 m-4 w-80">
+              <p className="italic text-gray-700">"{review.feedback}"</p>
+              <p className="mt-4 font-bold text-gray-900">- {review.name}</p>
+            </div>
+          ))}
         </div>
       </section>
 
