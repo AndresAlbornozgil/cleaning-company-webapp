@@ -50,7 +50,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <section id="home" className="min-h-screen bg-gray-200 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-6xl font-bold mb-4">Welcome to Cleaning Co.</h1>
+          <h1 className="text-6xl font-bold mb-4">Mr. Squeaky Clean Solutions, LLC.</h1>
           <p className="text-xl">Top-quality residential and commercial cleaning services.</p>
         </div>
       </section>

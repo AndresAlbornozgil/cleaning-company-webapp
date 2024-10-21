@@ -43,7 +43,7 @@ const Header = () => {
     <header className="bg-blue-600 text-white p-4 fixed w-full top-0 z-50">
       <nav className="container mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold">
-          CLEANING CO.
+          Mr. Squeaky Clean Solutions, LLC.
         </div>
 
         {/* Hamburger Icon for Mobile */}
