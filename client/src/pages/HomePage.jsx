@@ -33,13 +33,15 @@ const HomePage = () => {
     setIsModalOpen(false);
   };
 
-  // Auto-slide every 3 seconds
+  // Auto-slide every 3 seconds when the modal is not open
   useEffect(() => {
+    if (isModalOpen) return; // Don't auto-slide if the modal is open
+
     const interval = setInterval(() => {
       handleNext();
     }, 3000);
 
-    // Clear the interval when component unmounts or modal opens
+    // Clear the interval when the component unmounts or modal opens
     return () => clearInterval(interval);
   }, [currentIndex, isModalOpen]);
 
