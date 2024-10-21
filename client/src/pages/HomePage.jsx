@@ -17,6 +17,9 @@ const HomePage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  let touchStartX = 0;
+  let touchEndX = 0;
+
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? workImages.length - 1 : prevIndex - 1
@@ -36,6 +39,21 @@ const HomePage = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  // Handle swipe on mobile devices
+  const handleTouchStart = (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  };
+
+  const handleTouchEnd = (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    if (touchStartX - touchEndX > 50) {
+      handleNext(); // Swipe left to go to the next image
+    }
+    if (touchEndX - touchStartX > 50) {
+      handlePrev(); // Swipe right to go to the previous image
+    }
   };
 
   // Auto-slide every 4 seconds when the modal is not open
@@ -89,7 +107,11 @@ const HomePage = () => {
           <h2 className="text-4xl font-bold mb-6">Our Work</h2>
           <p className="text-lg mb-4">Check out some of our recent projects.</p>
         </div>
-        <div className="relative w-full max-w-4xl">
+        <div
+          className="relative w-full max-w-4xl"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           <img
             src={workImages[currentIndex].src}
             alt={workImages[currentIndex].alt}
@@ -98,13 +120,13 @@ const HomePage = () => {
           />
           <button
             onClick={handlePrev}
-            className="absolute top-1/2 -left-8 transform -translate-y-1/2 text-gray-800 hover:text-black text-5xl"
+            className="absolute top-1/2 -left-8 transform -translate-y-1/2 text-gray-800 hover:text-black text-5xl hidden md:block"
           >
             &#10094;
           </button>
           <button
             onClick={handleNext}
-            className="absolute top-1/2 -right-8 transform -translate-y-1/2 text-gray-800 hover:text-black text-5xl"
+            className="absolute top-1/2 -right-8 transform -translate-y-1/2 text-gray-800 hover:text-black text-5xl hidden md:block"
           >
             &#10095;
           </button>
