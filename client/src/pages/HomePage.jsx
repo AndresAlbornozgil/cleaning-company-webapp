@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Assuming you're using React Router
 import bedroomImage from '../assets/beforeAfterBedroom.jpg';
 import bathroomImage from '../assets/beforeAfterBathroom.jpg';
 import livingRoomImage from '../assets/beforeAfterLivingRoom.jpg';
 import kitchenImage from '../assets/beforeAfterKitchen.jpg';
 import officeImage from '../assets/beforeAfterOffice.jpg';
+import mrSqueakyCleanImage from '../assets/MrSqueakyClean.jpg'; // Import the image
 
 const HomePage = () => {
   const workImages = [
@@ -16,6 +18,7 @@ const HomePage = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate(); // For navigation
 
   let touchStartX = 0;
   let touchEndX = 0;
@@ -39,6 +42,11 @@ const HomePage = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const goToServices = () => {
+    navigate("/services");
+    window.scrollTo(0, 0); // Scrolls to the top of the page after navigation
   };
 
   // Handle swipe on mobile devices
@@ -92,20 +100,24 @@ const HomePage = () => {
   ];
 
   return (
-    <div>
+    <div className="bg-gray-100">
       {/* Hero Section */}
-      <section id="home" className="min-h-screen bg-gray-200 flex items-center justify-center">
+      <section id="home" className="min-h-screen flex flex-col items-center justify-center py-12">
         <div className="text-center">
-          <h1 className="text-6xl font-bold mb-4">Mr. Squeaky Clean Solutions, LLC.</h1>
-          <p className="text-xl">Top-quality residential and commercial cleaning services.</p>
+          <h1 className="text-6xl font-bold mb-8">Mr. Squeaky Clean Solutions, LLC.</h1>
+          <img
+            src={mrSqueakyCleanImage}
+            alt="Mr. Squeaky Clean"
+            className="w-80 h-80 rounded-full shadow-lg mx-auto mb-8"
+          />
+          <p className="text-xl mt-4">Top-quality residential and commercial cleaning services.</p>
         </div>
       </section>
 
       {/* Our Work Section - Simple Image Slider */}
-      <section id="our-work" className="min-h-screen bg-white py-16 flex flex-col items-center">
+      <section id="our-work" className="min-h-screen py-16 flex flex-col items-center">
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold mb-6">Our Work</h2>
-          <p className="text-lg mb-4">Check out some of our recent projects.</p>
+          <h2 className="text-4xl font-bold mb-6">Check out some of our work</h2>
         </div>
         <div
           className="relative w-full max-w-4xl"
@@ -131,6 +143,13 @@ const HomePage = () => {
             &#10095;
           </button>
         </div>
+        {/* Our Services Button */}
+        <button
+          onClick={goToServices}
+          className="mt-8 px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all"
+        >
+          Our Services
+        </button>
       </section>
 
       {/* Modal for Viewing Images */}
@@ -165,10 +184,9 @@ const HomePage = () => {
       )}
 
       {/* Reviews Section - Enhanced Content */}
-      <section id="reviews" className="min-h-screen bg-gray-100 py-16">
+      <section id="reviews" className="min-h-screen py-16">
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold mb-6">Customer Reviews</h2>
-          <p className="text-lg mb-4">See what our satisfied clients have to say!</p>
+          <h2 className="text-4xl font-bold mb-6">See what our satisfied clients have to say!</h2>
         </div>
         <div className="flex flex-wrap justify-center">
           {reviews.map((review, index) => (
@@ -180,11 +198,13 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Contact Section - Half the height and centered content */}
-      <section id="contact" className="min-h-[50vh] bg-white flex items-center justify-center">
+      {/* Contact Section - Subtle, Blended Design */}
+      <section id="contact" className="py-12 flex flex-col items-center justify-center bg-gray-100 -mt-12">
         <div className="text-center">
-          <h2 className="text-4xl font-bold mb-4">Contact Us</h2>
-          <p className="text-lg">Get in touch with us at info@cleaningco.com or call (555) 123-4567.</p>
+          <h2 className="text-4xl font-bold mb-6">Contact Us</h2>
+          <p className="text-lg mb-4">Get in touch with us at:</p>
+          <p className="text-2xl font-semibold">info@cleaningco.com</p>
+          <p className="text-2xl font-semibold">Call us at (555) 123-4567</p>
         </div>
       </section>
     </div>
