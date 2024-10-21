@@ -1,61 +1,45 @@
-import React from 'react';
+import React from "react";
+import mrSqueakyCleanImage from "../assets/MrSqueakyClean.jpg"; // Import the image
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-gray-100 py-12">
-      <div className="container mx-auto px-6">
-        {/* Main Heading */}
-        <h1 className="text-4xl font-bold text-center mb-8">About Us</h1>
-
-        {/* Company Introduction */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-bold text-blue-600 mb-4">Who We Are</h2>
+    <div className="sm:flex items-center max-w-screen-xl">
+      <div className="sm:w-1/2 p-10">
+        <div className="image object-center text-center">
+          <img
+            src={mrSqueakyCleanImage}
+            alt="Mr. Squeaky Clean"
+            className="rounded-[70%]" // Add 70% border radius
+          />
+        </div>
+      </div>
+      <div className="sm:w-1/2 p-5">
+        <div className="text">
+          <h2 className="my-4 font-bold text-3xl sm:text-4xl text-black">
+            About Us
+          </h2>
           <p className="text-gray-700">
-            Welcome to Cleaning Co.! We are a passionate and dedicated team offering top-quality residential 
-            and commercial cleaning services. Our mission is to deliver exceptional service, ensuring that 
-            our clients always return to a clean and refreshing environment.
+            Welcome to Mr. Squeaky Clean Solutions, LLC, your trusted partner in
+            professional cleaning services. Established with a commitment to
+            excellence, we are a customer-centric company dedicated to
+            delivering high-quality, reliable, and eco-friendly cleaning
+            solutions for homes, offices, and commercial spaces. Our mission is
+            to redefine cleanliness through meticulous attention to detail,
+            professionalism, and personalized care, consistently exceeding
+            expectations by providing top-tier services tailored to specific
+            needs. Founded by Andres Albornoz, who recognized the need for
+            dependable and customized cleaning, Mr. Squeaky Clean Solutions was
+            built on values of integrity, transparency, and customer
+            satisfaction. We’ve grown from a small local team to a trusted name
+            known for quality, precision, and innovative approaches. Our
+            cleaners are meticulous, ensuring every corner shines, using
+            high-quality, eco-friendly, and non-toxic products that are safe for
+            you, your family, and the environment. We believe in fostering
+            long-lasting relationships with clients by consistently delivering
+            exceptional results and maintaining sustainable, effective cleaning
+            practices. At Mr. Squeaky Clean Solutions, we aim to create spaces
+            where you can thrive, relax, and feel comfortable.
           </p>
-        </div>
-
-        {/* Our Mission */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-bold text-blue-600 mb-4">Our Mission</h2>
-          <p className="text-gray-700">
-            At Cleaning Co., we aim to provide unmatched cleaning services tailored to meet the unique 
-            needs of our clients. We believe in using eco-friendly products and efficient cleaning techniques 
-            to create healthy and safe spaces.
-          </p>
-        </div>
-
-        {/* Our Values */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-bold text-blue-600 mb-4">Our Values</h2>
-          <ul className="list-disc list-inside text-gray-700">
-            <li className="mb-2"><strong>Customer First:</strong> We prioritize our clients' satisfaction in everything we do.</li>
-            <li className="mb-2"><strong>Integrity:</strong> We uphold honesty and transparency in our services.</li>
-            <li className="mb-2"><strong>Quality:</strong> Our team is committed to delivering excellence in every clean.</li>
-            <li className="mb-2"><strong>Eco-Friendly:</strong> We believe in protecting the environment by using green products.</li>
-          </ul>
-        </div>
-
-        {/* History Section */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-bold text-blue-600 mb-4">Our History</h2>
-          <p className="text-gray-700">
-            Founded in 2010, Cleaning Co. started as a small, family-owned business serving the local community. 
-            Over the years, we’ve expanded into a full-service cleaning company, working with residential 
-            and commercial clients across the region.
-          </p>
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center">
-          <button
-            className="bg-green-600 text-white py-3 px-8 rounded-full hover:bg-green-500 transition duration-300"
-            onClick={() => alert('Learn more about us coming soon!')}
-          >
-            Learn More About Us
-          </button>
         </div>
       </div>
     </div>
