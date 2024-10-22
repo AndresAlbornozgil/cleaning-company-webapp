@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 // Function to navigate and scroll to a section with a small delay to ensure the section is rendered
 const handleNavClick = (navigate, section) => {
@@ -7,7 +7,9 @@ const handleNavClick = (navigate, section) => {
   setTimeout(() => {
     const element = document.getElementById(section);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const yOffset = -80; // Adjust this offset value if needed to bring the section title fully into view
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
     }
   }, 100);  // Small delay to ensure smooth scrolling
 };
@@ -31,6 +33,18 @@ const Header = () => {
     }
   };
 
+  // Updated function to handle scrolling to sections within the homepage
+  const handleScrollToSection = (section) => {
+    if (location.pathname === '/') {
+      handleNavClick(navigate, section);
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        handleNavClick(navigate, section);
+      }, 300); // Small delay to ensure the page loads before scrolling
+    }
+  };
+
   // Function to handle scrolling to the top of the page for specific pages
   const handlePageNavClick = (path) => {
     navigate(path);
@@ -40,7 +54,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-blue-600 text-white p-4 fixed w-full top-0 z-50">
+    <header className="bg-[#9FA991] text-black p-4 fixed w-full top-0 z-50">
       <nav className="container mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold">
           Mr. Squeaky Clean Solutions, LLC.
@@ -58,29 +72,27 @@ const Header = () => {
 
         {/* Links - Hidden on mobile, visible on larger screens */}
         <ul className="hidden md:flex space-x-6 uppercase">
-          <li className="cursor-pointer" onClick={handleHomeClick}>Home</li>  {/* HOME behavior handled here */}
-          <li className="cursor-pointer" onClick={() => handlePageNavClick('/book-cleaning')}>Book Cleaning</li>  {/* Book Cleaning link */}
-          <li className="cursor-pointer" onClick={() => handlePageNavClick('/services')}>Services</li>  {/* Services link */}
-          <li className="cursor-pointer" onClick={() => handleNavClick(navigate, 'our-work')}>Our Work</li>
-          <li className="cursor-pointer" onClick={() => handleNavClick(navigate, 'reviews')}>Reviews</li>
-          <li className="cursor-pointer" onClick={() => handlePageNavClick('/about')}>About</li>  {/* About link */}
-          <li className="cursor-pointer" onClick={() => handleNavClick(navigate, 'contact')}>Contact</li>
-          <li className="cursor-pointer" onClick={() => handlePageNavClick('/jobs')}>Jobs</li>  {/* Jobs link */}
-          <li className="cursor-pointer" onClick={() => handlePageNavClick('/sign-in')}>Sign In</li>  {/* Sign In link */}
+          <li className="cursor-pointer font-bold" onClick={handleHomeClick}>Home</li>
+          <li className="cursor-pointer font-bold" onClick={() => handlePageNavClick('/book-cleaning')}>Schedule Cleaning</li>
+          <li className="cursor-pointer font-bold" onClick={() => handleScrollToSection('services')}>Services</li>
+          <li className="cursor-pointer font-bold" onClick={() => handleNavClick(navigate, 'reviews')}>Reviews</li>
+          <li className="cursor-pointer font-bold" onClick={() => handlePageNavClick('/about')}>About</li>
+          <li className="cursor-pointer font-bold" onClick={() => handleNavClick(navigate, 'contact')}>Contact</li>
+          <li className="cursor-pointer font-bold" onClick={() => handlePageNavClick('/jobs')}>Jobs</li>
+          <li className="cursor-pointer font-bold" onClick={() => handlePageNavClick('/sign-in')}>Sign In</li>
         </ul>
 
         {/* Mobile Menu - Visible only when isOpen is true */}
         {isOpen && (
-          <ul className="md:hidden absolute top-16 left-0 w-full bg-blue-600 text-white p-4 flex flex-col space-y-4">
-            <li className="cursor-pointer" onClick={() => { handleHomeClick(); toggleMenu(); }}>Home</li>  {/* Mobile HOME link */}
-            <li className="cursor-pointer" onClick={() => { handlePageNavClick('/book-cleaning'); toggleMenu(); }}>Book Cleaning</li>
-            <li className="cursor-pointer" onClick={() => { handlePageNavClick('/services'); toggleMenu(); }}>Services</li>
-            <li className="cursor-pointer" onClick={() => { handleNavClick(navigate, 'our-work'); toggleMenu(); }}>Our Work</li>
-            <li className="cursor-pointer" onClick={() => { handleNavClick(navigate, 'reviews'); toggleMenu(); }}>Reviews</li>
-            <li className="cursor-pointer" onClick={() => { handlePageNavClick('/about'); toggleMenu(); }}>About</li>
-            <li className="cursor-pointer" onClick={() => { handleNavClick(navigate, 'contact'); toggleMenu(); }}>Contact</li>
-            <li className="cursor-pointer" onClick={() => { handlePageNavClick('/jobs'); toggleMenu(); }}>Jobs</li>
-            <li className="cursor-pointer" onClick={() => { handlePageNavClick('/sign-in'); toggleMenu(); }}>Sign In</li>
+          <ul className="md:hidden absolute top-16 left-0 w-full bg-[#9FA991] text-black p-4 flex flex-col space-y-4">
+            <li className="cursor-pointer font-bold" onClick={() => { handleHomeClick(); toggleMenu(); }}>Home</li>
+            <li className="cursor-pointer font-bold" onClick={() => { handlePageNavClick('/book-cleaning'); toggleMenu(); }}>Schedule Cleaning</li>
+            <li className="cursor-pointer font-bold" onClick={() => { handleScrollToSection('services'); toggleMenu(); }}>Services</li>
+            <li className="cursor-pointer font-bold" onClick={() => { handleNavClick(navigate, 'reviews'); toggleMenu(); }}>Reviews</li>
+            <li className="cursor-pointer font-bold" onClick={() => { handlePageNavClick('/about'); toggleMenu(); }}>About</li>
+            <li className="cursor-pointer font-bold" onClick={() => { handleNavClick(navigate, 'contact'); toggleMenu(); }}>Contact</li>
+            <li className="cursor-pointer font-bold" onClick={() => { handlePageNavClick('/jobs'); toggleMenu(); }}>Jobs</li>
+            <li className="cursor-pointer font-bold" onClick={() => { handlePageNavClick('/sign-in'); toggleMenu(); }}>Sign In</li>
           </ul>
         )}
       </nav>

@@ -2,5 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
+/* Dark mode for sections */
+.dark-section {
+    background-color: #1a1a1a; /* Dark background color */
+    color: #ffffff; /* Light text color for better contrast */
+  }
+  
+  .dark-section p,
+  .dark-section h2,
+  .dark-section h3 {
+    color: #ffffff; /* Ensuring all text is visible */
+  }
+  
+  .dark-section .bg-element {
+    background-color: #2a2a2a; /* Slightly lighter dark for elements */
+  }
+  
+  .dark-section .text-element {
+    color: #ffffff;
+  }
+  
+
+/* General Styling */
+
+button {
+    background-color: #85C5CF !important;
+}
+
+#contactSVG {
+    background-color: #85C5CF !important;
+}

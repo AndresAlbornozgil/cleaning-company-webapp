@@ -59,7 +59,7 @@ const SignInForm = () => {
 
           <button
             className="w-full px-4 py-2 mt-2 bg-green-600 text-white rounded-xl"
-            onClick={() => navigate('/signup')}
+            onClick={() => navigate('/sign-up')}
           >
             Sign Up
           </button>

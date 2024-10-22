@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './index.css'
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
-import Services from './pages/Services';
 import About from './pages/About';
 import Jobs from './pages/Jobs';
 import BookCleaning from './pages/BookCleaning';
-import SignInPage from './pages/SignInPage';
+import SignInPage from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import AdminPortal from './pages/AdminPortal'; // Newly added Admin Portal
 import ClientPortal from './pages/ClientPortal';
@@ -23,12 +23,11 @@ function App() {
           <Routes>
             {/* HomePage and Sections */}
             <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<Services />} />
             <Route path="/about" element={<About />} />
             <Route path="/jobs" element={<Jobs />} />
             <Route path="/book-cleaning" element={<BookCleaning />} />
             <Route path="/sign-in" element={<SignInPage />} />
-            <Route path="/signup" element={<SignUp />} />
+            <Route path="/sign-up" element={<SignUp />} />
 
             {/* Portals */}
             <Route path="/admin-portal" element={<AdminPortal />} />
