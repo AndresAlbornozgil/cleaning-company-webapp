@@ -4,10 +4,10 @@ import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#9FA991] text-black py-4">
+    <footer className="bg-[#85C5CF] text-black py-10">
       <div className="container mx-auto text-center">
-        <p className="text-sm mb-4">
-          &copy; 2024 Mr. Squeaky Clean Solutions, LLC. All rights reserved.
+        <p className="text-4xl font-bold mb-4">
+          Follow Our Social
         </p>
 
         <div className="flex justify-center space-x-6">

@@ -54,7 +54,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-[#9FA991] text-black p-4 fixed w-full top-0 z-50">
+    <header className="bg-[#85C5CF] text-black p-4 fixed w-full top-0 z-50">
       <nav className="container mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold">
           Mr. Squeaky Clean Solutions, LLC.
@@ -84,7 +84,7 @@ const Header = () => {
 
         {/* Mobile Menu - Visible only when isOpen is true */}
         {isOpen && (
-          <ul className="md:hidden absolute top-16 left-0 w-full bg-[#9FA991] text-black p-4 flex flex-col space-y-4">
+          <ul className="md:hidden absolute top-16 left-0 w-full bg-[#85C5CF] text-black p-4 flex flex-col space-y-4">
             <li className="cursor-pointer font-bold" onClick={() => { handleHomeClick(); toggleMenu(); }}>Home</li>
             <li className="cursor-pointer font-bold" onClick={() => { handlePageNavClick('/book-cleaning'); toggleMenu(); }}>Schedule Cleaning</li>
             <li className="cursor-pointer font-bold" onClick={() => { handleScrollToSection('services'); toggleMenu(); }}>Services</li>

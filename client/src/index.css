@@ -26,9 +26,27 @@
 /* General Styling */
 
 button {
-    background-color: #85C5CF !important;
+  background-color: #98FF98 !important;
+  color: black !important;
+  font-weight: bolder;
 }
 
 #contactSVG {
-    background-color: #85C5CF !important;
+  background-color: #98FF98 !important;
+  color: black !important;
 }
+
+#signInButton {
+  background-color: #85C5CF !important;
+}
+
+#goBackButton {
+  background-color: #85C5CF !important;
+}
+
+
+/* Palette
+#98FF98 Green
+#85C5CF Blue
+#DED7CF Beige
+*/

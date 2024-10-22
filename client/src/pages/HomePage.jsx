@@ -6,6 +6,11 @@ import "../index.css";
 const HomePage = () => {
   const navigate = useNavigate(); // For navigation
 
+  const handleNavigateToBooking = () => {
+    navigate("/book-cleaning");
+    window.scrollTo(0, 0); // Scroll to the top of the page after navigation
+  };
+
   const reviews = [
     {
       name: "Jessica Miller",
@@ -58,7 +63,7 @@ const HomePage = () => {
 
       {/* Services Section */}
       <section
-        className="w-full py-10 dark-section" // Apply dark mode class here
+        className="w-full py-10 dark-section"
         id="services"
       >
         <div className="text-center mb-8">
@@ -91,7 +96,7 @@ const HomePage = () => {
             </p>
             <button
               className="mt-4 px-6 py-2 bg-blue-800 text-white rounded-md hover:bg-blue-900"
-              onClick={() => navigate("/book-cleaning")}
+              onClick={handleNavigateToBooking}
             >
               Schedule Cleaning
             </button>
@@ -123,7 +128,7 @@ const HomePage = () => {
             </p>
             <button
               className="mt-4 px-6 py-2 bg-blue-800 text-white rounded-md hover:bg-blue-900"
-              onClick={() => navigate("/book-cleaning")}
+              onClick={handleNavigateToBooking}
             >
               Schedule Cleaning
             </button>
@@ -139,7 +144,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Reviews Section - Fit Screen */}
+      {/* Reviews Section */}
       <section
         id="reviews"
         className="min-h-screen flex flex-col justify-center items-center py-12 bg-[#DED7CF]"
@@ -162,7 +167,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Contact Section - Subtle, Blended Design */}
+      {/* Contact Section */}
       <section className="dark-section" id="contact">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="mb-4">

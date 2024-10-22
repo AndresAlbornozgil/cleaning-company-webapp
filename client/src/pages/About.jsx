@@ -3,9 +3,9 @@ import mrSqueakyCleanImage from "../assets/MrSqueakyClean.jpg"; // Import the im
 
 const About = () => {
   return (
-    <div className="sm:flex items-center max-w-screen-xl">
-      <div className="sm:w-1/2 p-10">
-        <div className="image object-center text-center">
+    <div className="sm:flex items-center justify-center max-w-full bg-[#1a1a1a] text-white overflow-hidden py-10"> {/* Added padding to create more space */}
+      <div className="sm:w-2/5 p-4 flex justify-center mt-6 mb-6"> {/* Added margin to top and bottom */}
+        <div className="image object-center">
           <img
             src={mrSqueakyCleanImage}
             alt="Mr. Squeaky Clean"
@@ -13,12 +13,12 @@ const About = () => {
           />
         </div>
       </div>
-      <div className="sm:w-1/2 p-5">
+      <div className="sm:w-3/5 p-4 sm:pl-6 mt-6 mb-6"> {/* Added margin to top and bottom */}
         <div className="text">
-          <h2 className="my-4 font-bold text-3xl sm:text-4xl text-black">
+          <h2 className="my-4 font-bold text-3xl sm:text-4xl text-white">
             About Us
           </h2>
-          <p className="text-gray-700">
+          <p className="text-gray-300">
             Welcome to Mr. Squeaky Clean Solutions, LLC, your trusted partner in
             professional cleaning services. Established with a commitment to
             excellence, we are a customer-centric company dedicated to
