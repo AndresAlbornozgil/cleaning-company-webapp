@@ -4,7 +4,7 @@ import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#85C5CF] text-black py-10">
+    <footer className="bg-[#1a1a1a] text-white py-10">
       <div className="container mx-auto text-center">
         <p className="text-4xl font-bold mb-4">
           Follow Us
@@ -16,7 +16,7 @@ const Footer = () => {
             href="https://www.facebook.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-gray-700"
+            className="hover:text-gray-400"
           >
             <FontAwesomeIcon icon={faFacebook} size="2x" />
           </a>
@@ -26,7 +26,7 @@ const Footer = () => {
             href="https://www.instagram.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-gray-700"
+            className="hover:text-gray-400"
           >
             <FontAwesomeIcon icon={faInstagram} size="2x" />
           </a>
