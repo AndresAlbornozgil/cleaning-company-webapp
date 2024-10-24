@@ -29,7 +29,7 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-[#1a1a1a]">
-      <div className="p-6 border w-96 shadow-lg rounded-md bg-[#DED7CF] text-black">
+      <div className="p-6 border w-96 shadow-lg rounded-md" style={{ backgroundColor: '#F5F5F5' }}> {/* Updated background color */}
         <div className="text-center">
           {error && <p className="text-red-500 text-xs italic mt-2">{error.message}</p>}
           <h3 className="text-lg leading-6 font-medium text-gray-900">Create Account</h3>

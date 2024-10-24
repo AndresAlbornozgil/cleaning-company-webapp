@@ -55,15 +55,17 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-[#85C5CF] text-black p-4 fixed w-full top-0 z-50">
+    <header className="bg-[#5DADE2] text-black p-4 fixed w-full top-0 z-50">
       <nav className="container mx-auto flex justify-between items-center">
-        <div className="text-2xl font-bold">
-          Mr. Squeaky Clean Solutions
-        </div>
+        <div className="text-2xl font-bold">Mr. Squeaky Clean Solutions</div>
 
         {/* Hamburger Icon for Mobile */}
         <div className="md:hidden">
-          <button id="dropdownMenu" onClick={toggleMenu} className="focus:outline-none">
+          <button
+            id="dropdownMenu"
+            onClick={toggleMenu}
+            className="focus:outline-none"
+          >
             {/* Hamburger icon */}
             <svg
               className="w-8 h-8"
@@ -133,7 +135,10 @@ const Header = () => {
 
         {/* Mobile Menu - Visible only when isOpen is true */}
         {isOpen && (
-          <ul id="dropdownList" className="md:hidden absolute top-16 left-0 w-full bg-[#85C5CF] text-black p-4 flex flex-col space-y-4">
+          <ul
+            id="dropdownList"
+            className="md:hidden absolute top-16 left-0 w-full bg-[#5DADE2] text-black p-4 flex flex-col space-y-4"
+          >
             <li
               className="cursor-pointer font-bold"
               onClick={() => {

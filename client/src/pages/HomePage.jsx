@@ -44,7 +44,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <section
         id="home"
-        className="min-h-screen flex flex-col items-center justify-center py-12"
+        className="min-h-screen flex flex-col items-center justify-center py-12 bg-[#F5F5F5]" // Updated background color
       >
         <div className="text-center">
           <h1 className="text-6xl font-bold mb-4">
@@ -74,101 +74,80 @@ const HomePage = () => {
 
       {/* Services Section */}
       <section className="w-full py-10 bg-[#1a1a1a] text-white" id="services">
-  <div className="text-center mb-8">
-    <h2 className="font-heading text-3xl sm:text-5xl font-bold tracking-tight mb-6">
-      Our Services
-    </h2>
-  </div>
+        <div className="text-center mb-8">
+          <h2 className="font-heading text-3xl sm:text-5xl font-bold tracking-tight mb-6">
+            Our Services
+          </h2>
+        </div>
 
-  {/* Small & Medium Business Cleaning */}
-  <div className="xl:w-[80%] sm:w-[85%] xs:w-[90%] mx-auto flex flex-wrap md:flex-nowrap md:gap-4 xs:gap-4 justify-center items-center mt-8">
-    <div className="lg:w-[50%] xs:w-full">
-      <img
-        className="w-full h-auto rounded-lg"
-        src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHxob21lfGVufDB8MHx8fDE3MTA0OTAwNjl8MA&ixlib=rb-4.0.3&q=80&w=1080"
-        alt="Small & Medium Business Cleaning"
-      />
-    </div>
-    <div className="lg:w-[50%] xs:w-full bg-[#2a2a2a] p-6 rounded-lg mt-0 md:mt-0">
-      <h2 className="text-3xl font-semibold">
-        Small & Medium Business Cleaning
-      </h2>
-      <p className="text-md mt-4 leading-relaxed">
-        For smaller establishments, cleanliness is key to making a great first impression. Our Small & Medium Business Cleaning services are crafted to fit the unique needs of local businesses like boutiques, cafes, clinics, and small offices. We prioritize flexibility, efficiency, and attention to detail, so you can focus on running your business while we ensure it shines.
-      </p>
-      <ul className="text-md mt-4 list-disc list-inside leading-relaxed">
-        <li>
-          <strong>Routine Office Cleaning:</strong> From daily touch-ups to weekly deep cleans, we take care of dusting, vacuuming, trash removal, and surface sanitization, ensuring your workspace always looks professional and inviting.
-        </li>
-        <li>
-          <strong>Retail Store Maintenance:</strong> Keep your retail space spotless with services that focus on key areas such as floors, displays, fitting rooms, and checkout counters. We understand that a clean store means better sales and happier customers.
-        </li>
-        <li>
-          <strong>Flexible Scheduling:</strong> We offer early morning, late evening, and weekend cleaning options, allowing you to choose a time that suits your business operations best, without interruptions.
-        </li>
-        <li>
-          <strong>Customizable Plans:</strong> Every business is different. Our cleaning plans are customizable to match your specific needs, so you only pay for the services you require.
-        </li>
-      </ul>
-      <p className="text-md mt-4 leading-relaxed">
-        <strong>Why Choose Us?</strong> With a team that’s meticulous, reliable, and discreet, we make sure your business always looks its best, creating a welcoming environment for your customers and staff. Our flexible packages mean you can scale your services as your business grows.
-      </p>
-      <button
-        className="mt-4 px-6 py-2 bg-blue-800 text-white rounded-md hover:bg-blue-900"
-        onClick={handleNavigateToBooking}
-      >
-        Schedule Cleaning
-      </button>
-    </div>
-  </div>
-
-  {/* Large Facility Cleaning */}
-  <div className="xl:w-[80%] sm:w-[85%] xs:w-[90%] mx-auto flex flex-wrap md:flex-nowrap md:flex-row-reverse md:gap-4 xs:gap-4 justify-center items-center mt-6">
-    <div className="lg:w-[50%] xs:w-full">
-      <img
-        className="w-full h-auto rounded-lg"
-        src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMXx8aG9tZXxlbnwwfDB8fHwxNzEwNDkwMDcwfDA&ixlib=rb-4.0.3&q=80&w=1080"
-        alt="Large Facility Cleaning"
-      />
-    </div>
-    <div className="lg:w-[50%] xs:w-full bg-[#2a2a2a] p-6 rounded-lg mt-0 md:mt-0">
-      <h2 className="text-3xl font-semibold">Large Facility Cleaning</h2>
-      <p className="text-md mt-4 leading-relaxed">
-        Managing a larger commercial space comes with its own set of challenges. Our Large Facility Cleaning services are designed to handle the unique requirements of big businesses, from multi-floor corporate offices to industrial complexes and shopping centers. Equipped with specialized tools and a dedicated team, we ensure that even the largest facilities are spotless, safe, and up to high standards.
-      </p>
-      <ul className="text-md mt-4 list-disc list-inside leading-relaxed">
-        <li>
-          <strong>Corporate Office Cleaning:</strong> Our team manages everything from desk areas and conference rooms to lobbies and common areas. We work quietly and efficiently to keep your office environment pristine without disrupting your team.
-        </li>
-        <li>
-          <strong>Industrial & Warehouse Cleaning:</strong> We handle the heavy-duty cleaning required for manufacturing plants, warehouses, and other industrial spaces. Our services include machinery cleaning, floor maintenance, and thorough sanitization of high-traffic areas.
-        </li>
-        <li>
-          <strong>Shopping Center & Venue Cleaning:</strong> Keeping large venues clean can be complex, but it’s our specialty. We provide comprehensive cleaning for shopping malls, entertainment venues, and convention centers, focusing on public areas, restrooms, food courts, and more.
-        </li>
-        <li>
-          <strong>Advanced Sanitization & Disinfection:</strong> Ideal for healthcare facilities, gyms, and other businesses where hygiene is critical. We use hospital-grade disinfectants and the latest equipment to ensure a safe and sanitary environment.
-        </li>
-      </ul>
-      <p className="text-md mt-4 leading-relaxed">
-        <strong>Why Choose Us?</strong> Our expertise in handling large facilities means we bring efficiency and quality to every project. We understand the demands of big spaces and have the manpower and equipment to handle them seamlessly. With our proven track record and flexible service packages, we make sure your facility reflects the professionalism of your business.
-      </p>
-      <button
-        className="mt-4 px-6 py-2 bg-blue-800 text-white rounded-md hover:bg-blue-900"
-        onClick={handleNavigateToBooking}
-      >
-        Schedule Cleaning
-      </button>
-    </div>
-  </div>
-</section>
-
-
+        {/* Small & Medium Business Cleaning */}
+        <div className="xl:w-[80%] sm:w-[85%] xs:w-[90%] mx-auto flex flex-wrap md:flex-nowrap md:gap-4 xs:gap-4 justify-center items-center mt-8">
+          <div className="lg:w-[50%] xs:w-full">
+            <img
+              className="w-full h-auto rounded-lg"
+              src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHxob21lfGVufDB8MHx8fDE3MTA0OTAwNjl8MA&ixlib=rb-4.0.3&q=80&w=1080"
+              alt="Small & Medium Business Cleaning"
+            />
+          </div>
+          <div className="lg:w-[50%] xs:w-full bg-[#2a2a2a] p-6 rounded-lg mt-0 md:mt-0">
+            <h2 className="text-3xl font-semibold">
+              Small & Medium Business Cleaning
+            </h2>
+            <p className="text-md mt-4 leading-relaxed">
+              For smaller establishments, cleanliness is key to making a great
+              first impression. Our Small & Medium Business Cleaning services
+              are crafted to fit the unique needs of local businesses like
+              boutiques, cafes, clinics, and small offices. We prioritize
+              flexibility, efficiency, and attention to detail, so you can focus
+              on running your business while we ensure it shines.
+            </p>
+            <ul className="text-md mt-4 list-disc list-inside leading-relaxed">
+              <li>
+                <strong>Routine Office Cleaning:</strong> From daily touch-ups
+                to weekly deep cleans, we take care of dusting, vacuuming, trash
+                removal, and surface sanitization, ensuring your workspace
+                always looks professional and inviting.
+              </li>
+              <li>
+                <strong>Retail Store Maintenance:</strong> Keep your retail
+                space spotless with services that focus on key areas such as
+                floors, displays, fitting rooms, and checkout counters. We
+                understand that a clean store means better sales and happier
+                customers.
+              </li>
+              <li>
+                <strong>Flexible Scheduling:</strong> We offer early morning,
+                late evening, and weekend cleaning options, allowing you to
+                choose a time that suits your business operations best, without
+                interruptions.
+              </li>
+              <li>
+                <strong>Customizable Plans:</strong> Every business is
+                different. Our cleaning plans are customizable to match your
+                specific needs, so you only pay for the services you require.
+              </li>
+            </ul>
+            <p className="text-md mt-4 leading-relaxed">
+              <strong>Why Choose Us?</strong> With a team that’s meticulous,
+              reliable, and discreet, we make sure your business always looks
+              its best, creating a welcoming environment for your customers and
+              staff. Our flexible packages mean you can scale your services as
+              your business grows.
+            </p>
+            <button
+              className="mt-4 px-6 py-2 bg-blue-800 text-white rounded-md hover:bg-blue-900"
+              onClick={handleNavigateToBooking}
+            >
+              Schedule Cleaning
+            </button>
+          </div>
+        </div>
+      </section>
 
       {/* Reviews Section */}
       <section
         id="reviews"
-        className="min-h-screen flex flex-col justify-center items-center py-12 bg-[#DED7CF]"
+        className="min-h-screen flex flex-col justify-center items-center py-12 bg-[#F5F5F5]" // Updated background color
       >
         <div className="text-center mb-8">
           <h2 className="text-4xl font-bold mb-6">

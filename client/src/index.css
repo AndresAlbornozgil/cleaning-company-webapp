@@ -26,30 +26,30 @@
 /* General Styling */
 
 button {
-  background-color: #98FF98 !important;
+  background-color: #50C878 !important;
   color: black !important;
   font-weight: bolder;
 }
 
 #contactSVG {
-  background-color: #98FF98 !important;
+  background-color: #50C878 !important;
   color: black !important;
 }
 
 #signInButton {
-  background-color: #85C5CF !important;
+  background-color: #5DADE2 !important;
 }
 
 #goBackButton {
-  background-color: #85C5CF !important;
+  background-color: #5DADE2 !important;
 }
 
 #dropdownMenu {
-  background-color: #85C5CF;
+  background-color: #5DADE2;
 }
 
 #dropdownMenu {
-  background-color: #85C5CF !important;
+  background-color: #5DADE2 !important;
 }
 
 #dropdownList {
@@ -61,9 +61,10 @@ button {
 }
 
 /* Palette
-#98FF98 Green
-#85C5CF Blue
+#50C878 Green (For Buttons)
+#5DADE2 Blue (For Header)
 #DED7CF Beige
+#F5F5F5 Fresh Gray/White (For Background)
 #1a1a1a Dark Mode (Darker)
 #2a2a2a Dark Mode (Lighther)
 */

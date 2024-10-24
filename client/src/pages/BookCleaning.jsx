@@ -24,7 +24,7 @@ const GetEstimate = () => {
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-[#1a1a1a] p-6">
-      <div className="max-w-md w-full p-6 bg-[#DED7CF] shadow-md rounded-md">
+      <div className="max-w-md w-full p-6 bg-[#F5F5F5] shadow-md rounded-md"> {/* Updated background color */}
         <h2 className="text-2xl font-bold mb-4 text-center">Get a Free Estimate</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -155,4 +155,3 @@ const GetEstimate = () => {
 };
 
 export default GetEstimate;
- 
