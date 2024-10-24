@@ -15,29 +15,30 @@ const HomePage = () => {
     {
       name: "Jessica Miller",
       feedback:
-        "Mr. Squeaky Clean did an amazing job with our home! We had just moved in, and they made sure everything was spotless. Highly recommended!",
+        "Mr. Squeaky Clean did an outstanding job with our office! We had just moved into a new space, and they made sure everything was spotless. Highly recommended for businesses!",
     },
     {
       name: "Carlos Ramirez",
       feedback:
-        "Great service! The team was punctual, professional, and left our office looking better than ever. Will definitely be using them again.",
+        "Great service! The team was punctual, professional, and left our retail store looking better than ever. Will definitely be using them again for regular cleanings.",
     },
     {
       name: "Samantha Lee",
       feedback:
-        "I've tried other cleaning companies, but none compare to Mr. Squeaky Clean. They pay attention to every detail and are always reliable.",
+        "I've tried other commercial cleaning companies, but none compare to Mr. Squeaky Clean. They pay attention to every detail and are always reliable for our business needs.",
     },
     {
       name: "Michael Johnson",
       feedback:
-        "Fantastic service! Very thorough and the staff is super friendly. My house has never looked so clean!",
+        "Fantastic service! Very thorough and the staff is super friendly. Our office has never looked so clean and organized!",
     },
     {
       name: "Emily Thompson",
       feedback:
-        "I booked them for a deep cleaning before hosting a party, and they did not disappoint. The place was sparkling! Thank you!",
+        "We booked them for a deep cleaning before an important client event, and they did not disappoint. The place was sparkling and made a great impression!",
     },
   ];
+  
 
   return (
     <div className="bg-[#DED7CF]">

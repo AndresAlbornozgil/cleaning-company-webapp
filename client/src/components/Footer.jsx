@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="bg-[#85C5CF] text-black py-10">
       <div className="container mx-auto text-center">
         <p className="text-4xl font-bold mb-4">
-          Follow Our Social
+          Follow Us
         </p>
 
         <div className="flex justify-center space-x-6">
