@@ -48,10 +48,21 @@ const HomePage = () => {
       >
         <div className="text-center">
           <h1 className="text-6xl font-bold mb-4">
-            Mr. Squeaky Clean Solutions, LLC.
+            <span className="block sm:hidden">Mr.</span>
+            <span className="block sm:hidden">Squeaky Clean</span>
+            <span className="block sm:hidden">Solutions</span>
+
+            <span className="hidden sm:inline-block md:hidden">
+              Mr. Squeaky Clean
+            </span>
+            <span className="hidden sm:block md:hidden">Solutions</span>
+
+            <span className="hidden md:inline-block">
+              Mr. Squeaky Clean Solutions
+            </span>
           </h1>
           <p className="text-xl mt-4">
-            Top-quality residential and commercial cleaning services.
+            Top-quality commercial cleaning services.
           </p>
           <img
             src={mrSqueakyCleanImage}
@@ -62,37 +73,66 @@ const HomePage = () => {
       </section>
 
       {/* Services Section */}
-      <section
-        className="w-full py-10 dark-section"
-        id="services"
-      >
+      <section className="w-full py-10 dark-section" id="services">
         <div className="text-center mb-8">
           <h2 className="font-heading text-3xl sm:text-5xl font-bold tracking-tight mb-6">
             Our Services
           </h2>
         </div>
 
+        {/* Small & Medium Business Cleaning */}
         <div className="xl:w-[80%] sm:w-[85%] xs:w-[90%] mx-auto flex flex-wrap md:flex-nowrap md:gap-4 xs:gap-4 justify-center items-center mt-8">
           <div className="lg:w-[50%] xs:w-full">
             <img
               className="w-full h-auto rounded-lg"
               src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHxob21lfGVufDB8MHx8fDE3MTA0OTAwNjl8MA&ixlib=rb-4.0.3&q=80&w=1080"
-              alt="billboard image"
+              alt="Small & Medium Business Cleaning"
             />
           </div>
-          <div className="lg:w-[50%] xs:w-full bg-element text-element p-6 rounded-lg mt-4 md:mt-0">
-            <h2 className="text-3xl font-semibold">Commercial Cleaning</h2>
+          <div className="lg:w-[50%] xs:w-full bg-element text-element p-6 rounded-lg mt-0 md:mt-0">
+            <h2 className="text-3xl font-semibold">
+              Small & Medium Business Cleaning
+            </h2>
             <p className="text-md mt-4">
-              Commercial cleaning services cater to businesses of all sizes,
-              ensuring a clean and welcoming environment for employees, clients,
-              and visitors. From office spaces to retail stores, our expert team
-              handles everything from daily janitorial tasks to deep cleaning
-              and sanitization, using high-grade equipment and eco-friendly
-              products. We focus on maintaining cleanliness and hygiene
-              standards, which are essential for a productive workplace. Whether
-              it’s scheduled cleaning or one-time services, we ensure every
-              corner is spotless, allowing businesses to operate smoothly
-              without disruption.
+              For smaller establishments, cleanliness is key to making a great
+              first impression. Our Small & Medium Business Cleaning services
+              are crafted to fit the unique needs of local businesses like
+              boutiques, cafes, clinics, and small offices. We prioritize
+              flexibility, efficiency, and attention to detail, so you can focus
+              on running your business while we ensure it shines.
+            </p>
+            <ul className="text-md mt-4 list-disc list-inside">
+              <li>
+                <strong>Routine Office Cleaning:</strong> From daily touch-ups
+                to weekly deep cleans, we take care of dusting, vacuuming, trash
+                removal, and surface sanitization, ensuring your workspace
+                always looks professional and inviting.
+              </li>
+              <li>
+                <strong>Retail Store Maintenance:</strong> Keep your retail
+                space spotless with services that focus on key areas such as
+                floors, displays, fitting rooms, and checkout counters. We
+                understand that a clean store means better sales and happier
+                customers.
+              </li>
+              <li>
+                <strong>Flexible Scheduling:</strong> We offer early morning,
+                late evening, and weekend cleaning options, allowing you to
+                choose a time that suits your business operations best, without
+                interruptions.
+              </li>
+              <li>
+                <strong>Customizable Plans:</strong> Every business is
+                different. Our cleaning plans are customizable to match your
+                specific needs, so you only pay for the services you require.
+              </li>
+            </ul>
+            <p className="text-md mt-4">
+              <strong>Why Choose Us?</strong> With a team that’s meticulous,
+              reliable, and discreet, we make sure your business always looks
+              its best, creating a welcoming environment for your customers and
+              staff. Our flexible packages mean you can scale your services as
+              your business grows.
             </p>
             <button
               className="mt-4 px-6 py-2 bg-blue-800 text-white rounded-md hover:bg-blue-900"
@@ -103,28 +143,61 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* col-2 */}
-        <div className="xl:w-[80%] sm:w-[85%] xs:w-[90%] mx-auto flex flex-wrap md:flex-nowrap md:gap-4 xs:gap-4 justify-center items-center mt-6">
-          {/* Responsive image */}
-          <div className="md:hidden xs:block xs:w-full">
+        {/* Large Facility Cleaning */}
+        <div className="xl:w-[80%] sm:w-[85%] xs:w-[90%] mx-auto flex flex-wrap md:flex-nowrap md:flex-row-reverse md:gap-4 xs:gap-4 justify-center items-center mt-6">
+          <div className="lg:w-[50%] xs:w-full">
             <img
               className="w-full h-auto rounded-lg"
               src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMXx8aG9tZXxlbnwwfDB8fHwxNzEwNDkwMDcwfDA&ixlib=rb-4.0.3&q=80&w=1080"
-              alt="billboard image"
+              alt="Large Facility Cleaning"
             />
           </div>
-          <div className="lg:w-[50%] xs:w-full bg-element text-element p-6 rounded-lg mt-4 md:mt-0">
-            <h2 className="text-3xl font-semibold">Residential Cleaning</h2>
+          <div className="lg:w-[50%] xs:w-full bg-element text-element p-6 rounded-lg mt-0 md:mt-0">
+            <h2 className="text-3xl font-semibold">Large Facility Cleaning</h2>
             <p className="text-md mt-4">
-              Residential cleaning services are designed to give homeowners a
-              spotless, comfortable, and welcoming living space. Our
-              professional team provides thorough cleaning from top to bottom,
-              covering areas such as kitchens, bathrooms, living rooms, and
-              bedrooms. We use safe, eco-friendly products to ensure a healthy
-              environment for your family. Whether it's regular cleaning,
-              seasonal deep cleaning, or preparing your home for special
-              occasions, our flexible scheduling and attention to detail
-              guarantee your home remains fresh, clean, and inviting.
+              Managing a larger commercial space comes with its own set of
+              challenges. Our Large Facility Cleaning services are designed to
+              handle the unique requirements of big businesses, from multi-floor
+              corporate offices to industrial complexes and shopping centers.
+              Equipped with specialized tools and a dedicated team, we ensure
+              that even the largest facilities are spotless, safe, and up to
+              high standards.
+            </p>
+            <ul className="text-md mt-4 list-disc list-inside">
+              <li>
+                <strong>Corporate Office Cleaning:</strong> Our team manages
+                everything from desk areas and conference rooms to lobbies and
+                common areas. We work quietly and efficiently to keep your
+                office environment pristine without disrupting your team.
+              </li>
+              <li>
+                <strong>Industrial & Warehouse Cleaning:</strong> We handle the
+                heavy-duty cleaning required for manufacturing plants,
+                warehouses, and other industrial spaces. Our services include
+                machinery cleaning, floor maintenance, and thorough sanitization
+                of high-traffic areas.
+              </li>
+              <li>
+                <strong>Shopping Center & Venue Cleaning:</strong> Keeping large
+                venues clean can be complex, but it’s our specialty. We provide
+                comprehensive cleaning for shopping malls, entertainment venues,
+                and convention centers, focusing on public areas, restrooms,
+                food courts, and more.
+              </li>
+              <li>
+                <strong>Advanced Sanitization & Disinfection:</strong> Ideal for
+                healthcare facilities, gyms, and other businesses where hygiene
+                is critical. We use hospital-grade disinfectants and the latest
+                equipment to ensure a safe and sanitary environment.
+              </li>
+            </ul>
+            <p className="text-md mt-4">
+              <strong>Why Choose Us?</strong> Our expertise in handling large
+              facilities means we bring efficiency and quality to every project.
+              We understand the demands of big spaces and have the manpower and
+              equipment to handle them seamlessly. With our proven track record
+              and flexible service packages, we make sure your facility reflects
+              the professionalism of your business.
             </p>
             <button
               className="mt-4 px-6 py-2 bg-blue-800 text-white rounded-md hover:bg-blue-900"
@@ -132,14 +205,6 @@ const HomePage = () => {
             >
               Schedule Cleaning
             </button>
-          </div>
-          {/* Visible on larger screens */}
-          <div className="hidden md:block lg:w-[50%]">
-            <img
-              className="w-full h-auto rounded-lg"
-              src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMXx8aG9tZXxlbnwwfDB8fHwxNzEwNDkwMDcwfDA&ixlib=rb-4.0.3&q=80&w=1080"
-              alt="billboard image"
-            />
           </div>
         </div>
       </section>

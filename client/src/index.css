@@ -44,9 +44,25 @@ button {
   background-color: #85C5CF !important;
 }
 
+#dropdownMenu {
+  background-color: #85C5CF;
+}
+
+#dropdownMenu {
+  background-color: #85C5CF !important;
+}
+
+#dropdownList {
+  background-color: #1a1a1a;
+}
+
+#dropdownList li {
+  color: whitesmoke;
+}
 
 /* Palette
 #98FF98 Green
 #85C5CF Blue
 #DED7CF Beige
+#1a1a1a Dark mode (darker)
 */
