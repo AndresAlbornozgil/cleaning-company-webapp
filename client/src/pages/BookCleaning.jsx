@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 
 const GetEstimate = () => {
   const [formData, setFormData] = useState({
+    businessName: '',
     name: '',
     email: '',
     phone: '',
+    address: '',
+    preferredDay: '',
+    preferredTime: '',
     additionalNotes: ''
   });
 
@@ -24,6 +28,32 @@ const GetEstimate = () => {
         <h2 className="text-2xl font-bold mb-4 text-center">Get a Free Estimate</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
+            <label className="block text-sm font-medium mb-1">Business Name</label>
+            <input
+              type="text"
+              name="businessName"
+              value={formData.businessName}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded"
+              placeholder="Your business name"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium mb-1">Business Address</label>
+            <input
+              type="text"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded"
+              placeholder="Location where we will visit to provide an estimate"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
             <label className="block text-sm font-medium mb-1">Name</label>
             <input
               type="text"
@@ -31,6 +61,7 @@ const GetEstimate = () => {
               value={formData.name}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded"
+              placeholder="Your full name"
               required
             />
           </div>
@@ -43,6 +74,7 @@ const GetEstimate = () => {
               value={formData.email}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded"
+              placeholder="Your email address"
               required
             />
           </div>
@@ -55,8 +87,43 @@ const GetEstimate = () => {
               value={formData.phone}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded"
+              placeholder="Your phone number"
               required
             />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium mb-1">Preferred Day</label>
+            <input
+              type="date"
+              name="preferredDay"
+              value={formData.preferredDay}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium mb-1">Preferred Time</label>
+            <select
+              name="preferredTime"
+              value={formData.preferredTime}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            >
+              <option value="">Select a time</option>
+              {Array.from({ length: 24 }, (_, index) => {
+                const hour = index % 12 === 0 ? 12 : index % 12;
+                const period = index < 12 ? 'AM' : 'PM';
+                return (
+                  <option key={index} value={`${hour}:00 ${period}`}>
+                    {hour}:00 {period}
+                  </option>
+                );
+              })}
+            </select>
           </div>
 
           <div className="mb-4">
@@ -88,3 +155,4 @@ const GetEstimate = () => {
 };
 
 export default GetEstimate;
+ 
