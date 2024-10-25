@@ -58,7 +58,7 @@ const Header = () => {
     <header className="bg-[#5DADE2] text-black p-4 fixed w-full top-0 z-50 shadow-md">
       <nav className="container mx-auto flex justify-between items-center">
         <div
-          className="text-2xl font-bold cursor-pointer transition duration-200"
+          className="text-2xl font-bold cursor-pointer transition-none"
           onClick={handleHomeClick}
         >
           Mr. Squeaky Clean Solutions
@@ -92,7 +92,7 @@ const Header = () => {
         {/* Links - Hidden on mobile, visible on larger screens */}
         <ul className="hidden md:flex space-x-6 uppercase">
           <li
-            className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5] hover:text-black"
+            className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5]"
             onClick={handleHomeClick}
           >
             Home
@@ -104,40 +104,40 @@ const Header = () => {
             Schedule Cleaning
           </li>
           <li
-            className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5] hover:text-black"
+            className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5]"
             onClick={() => handleScrollToSection("services")}
           >
             Services
           </li>
           <li
-            className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5] hover:text-black"
+            className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5]"
             onClick={() => handleNavClick(navigate, "reviews")}
           >
             Reviews
           </li>
           <li
-            className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5] hover:text-black"
+            className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5]"
             onClick={() => handlePageNavClick("/about")}
           >
             About
           </li>
           <li
-            className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5] hover:text-black"
+            className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5]"
             onClick={() => handleNavClick(navigate, "contact")}
           >
             Contact
           </li>
           <li
-            className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5] hover:text-black"
+            className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5]"
             onClick={() => handlePageNavClick("/jobs")}
           >
             Jobs
           </li>
           <li
-            className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5] hover:text-black"
+            className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5]"
             onClick={() => handlePageNavClick("/sign-in")}
           >
-            Sign In
+            HUB
           </li>
         </ul>
 
@@ -148,7 +148,7 @@ const Header = () => {
             className="md:hidden absolute top-16 left-0 w-full bg-[#5DADE2] text-black p-4 flex flex-col space-y-4"
           >
             <li
-              className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5] hover:text-black"
+              className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5]"
               onClick={() => {
                 handleHomeClick();
                 toggleMenu();
@@ -166,7 +166,7 @@ const Header = () => {
               Schedule Cleaning
             </li>
             <li
-              className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5] hover:text-black"
+              className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5]"
               onClick={() => {
                 handleScrollToSection("services");
                 toggleMenu();
@@ -175,7 +175,7 @@ const Header = () => {
               Services
             </li>
             <li
-              className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5] hover:text-black"
+              className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5]"
               onClick={() => {
                 handleNavClick(navigate, "reviews");
                 toggleMenu();
@@ -184,7 +184,7 @@ const Header = () => {
               Reviews
             </li>
             <li
-              className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5] hover:text-black"
+              className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5]"
               onClick={() => {
                 handlePageNavClick("/about");
                 toggleMenu();
@@ -193,7 +193,7 @@ const Header = () => {
               About
             </li>
             <li
-              className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5] hover:text-black"
+              className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5]"
               onClick={() => {
                 handleNavClick(navigate, "contact");
                 toggleMenu();
@@ -202,7 +202,7 @@ const Header = () => {
               Contact
             </li>
             <li
-              className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5] hover:text-black"
+              className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5]"
               onClick={() => {
                 handlePageNavClick("/jobs");
                 toggleMenu();
@@ -211,13 +211,13 @@ const Header = () => {
               Jobs
             </li>
             <li
-              className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5] hover:text-black"
+              className="cursor-pointer font-bold transition duration-200 transform hover:scale-105 hover:border-b-2 hover:border-[#F5F5F5]"
               onClick={() => {
                 handlePageNavClick("/sign-in");
                 toggleMenu();
               }}
             >
-              Sign In
+              HUB
             </li>
           </ul>
         )}

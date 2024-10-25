@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const SignInForm = () => {
-  const navigate = useNavigate();
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ username: '', password: '' });
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
@@ -15,8 +13,8 @@ const SignInForm = () => {
     e.preventDefault();
     console.log('Form submitted', formState);
 
-    if (!formState.email || !formState.password) {
-      setError({ message: 'Please enter both email and password.' });
+    if (!formState.username || !formState.password) {
+      setError({ message: 'Please enter both username and password.' });
     } else {
       setError(null);
     }
@@ -27,14 +25,14 @@ const SignInForm = () => {
       <div className="p-6 border w-96 shadow-lg rounded-md" style={{ backgroundColor: '#F5F5F5' }}> {/* Updated background color */}
         <div className="text-center">
           {error && <p className="text-red-500 text-xs italic mt-2">{error.message}</p>}
-          <h3 className="text-lg leading-6 font-medium text-black">Sign In</h3>
+          <h3 className="text-lg leading-6 font-medium text-black">Account</h3>
           <form className="mt-2 px-7 py-3" onSubmit={handleFormSubmit}>
             <input
               className="w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-lg focus:outline-none mb-4"
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formState.email}
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={formState.username}
               onChange={handleChange}
             />
             <input
@@ -53,15 +51,6 @@ const SignInForm = () => {
               Sign In
             </button>
           </form>
-
-          <p className="mt-4 text-gray-700">Don't have an account?</p>
-
-          <button
-            className="w-full px-4 py-2 mt-2 bg-green-600 text-white rounded-xl"
-            onClick={() => navigate('/sign-up')}
-          >
-            Sign Up
-          </button>
         </div>
       </div>
     </div>

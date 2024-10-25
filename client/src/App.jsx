@@ -8,10 +8,8 @@ import About from './pages/About';
 import Jobs from './pages/Jobs';
 import BookCleaning from './pages/BookCleaning'; // Updated from BookCleaning to ScheduleCleaning
 import SignInPage from './pages/SignIn';
-import SignUp from './pages/SignUp';
 import AdminPortal from './pages/AdminPortal';
-import ClientPortal from './pages/ClientPortal';
-import CrewPortal from './pages/CrewPortal';
+
 
 function App() {
   return (
@@ -25,10 +23,7 @@ function App() {
             <Route path="/jobs" element={<Jobs />} />
             <Route path="/book-cleaning" element={<BookCleaning />} />
             <Route path="/sign-in" element={<SignInPage />} />
-            <Route path="/sign-up" element={<SignUp />} />
             <Route path="/admin-portal" element={<AdminPortal />} />
-            <Route path="/client-portal" element={<ClientPortal />} />
-            <Route path="/crew-portal" element={<CrewPortal />} />
           </Routes>
         </main>
         <Footer />
