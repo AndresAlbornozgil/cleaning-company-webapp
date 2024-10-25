@@ -144,7 +144,7 @@ const GetEstimate = () => {
 
           <button
             type="submit"
-            className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700"
+            className="w-full bg-green-600 text-white p-3 text-lg rounded-lg hover:bg-green-700 transform hover:scale-105 transition duration-200"
           >
             Request Estimate
           </button>
